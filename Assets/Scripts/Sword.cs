@@ -39,10 +39,12 @@ public class Sword : MonoBehaviour
 
     private void HandleAttackInput()
     {
-        if (canAttack)
+        /*if (canAttack)
         {
             Attack();
-        }
+        }*/
+
+        Attack();
     }
 
     private void Attack()
