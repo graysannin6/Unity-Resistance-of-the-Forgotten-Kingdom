@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
+    [SerializeField] private float roamChangeDir = 2f;
     public enum State
     {
         Roaming
@@ -28,7 +29,7 @@ public class EnemyAI : MonoBehaviour
         {
             Vector2 randomPosition = GetRandomPosition();
             pathfinding.MoveTo(randomPosition);
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(roamChangeDir);
         }
     }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerInputs : MonoBehaviour
@@ -34,5 +35,10 @@ public class PlayerInputs : MonoBehaviour
     public Vector2 GetMovementInput()
     {
         return movementInput;
+    }
+
+    public PlayerControls GetPlayerControls()
+    {
+        return playerControls;
     }
 }

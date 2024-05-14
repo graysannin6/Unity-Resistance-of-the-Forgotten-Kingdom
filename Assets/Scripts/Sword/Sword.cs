@@ -6,6 +6,8 @@ public class Sword : MonoBehaviour
 {
     [SerializeField] private GameObject slashAnimPrefab;
     [SerializeField] private Transform attackPoint;
+    [SerializeField] private PolygonCollider2D weaponCollider;
+    [SerializeField] private float SwordAttackCD = 0.5f;
     private PlayerControls playerControls;
     private Animator animator;
     private bool canAttack = true;
@@ -15,6 +17,7 @@ public class Sword : MonoBehaviour
     private ActiveWeapon activeWeapon;
 
     private GameObject slashAnim;
+    private bool attackButtonPressed, isAttacking = false;
 
     private void Awake()
     {
@@ -28,46 +31,67 @@ public class Sword : MonoBehaviour
     private void OnEnable()
     {
         playerControls.Enable();
-        playerControls.Combat.Attack.started += _ => HandleAttackInput();
+
     }
 
     private void OnDisable()
     {
         playerControls.Disable();
-        playerControls.Combat.Attack.started -= _ => HandleAttackInput();
     }
 
-    private void HandleAttackInput()
+    private void StartAttacking()
     {
-        /*if (canAttack)
-        {
-            Attack();
-        }*/
+        attackButtonPressed = true;
+    }
 
-        Attack();
+    private void StopAttacking()
+    {
+        attackButtonPressed = false;
     }
 
     private void Attack()
     {
-        animator.SetTrigger("Attack");
-        canAttack = false;
-        slashAnim = Instantiate(slashAnimPrefab, attackPoint.position, Quaternion.identity);
-        slashAnim.transform.parent = this.transform.parent;
+        if (attackButtonPressed && !isAttacking)
+        {
+            isAttacking = true;
+            animator.SetTrigger("Attack");
+            weaponCollider.enabled = true;
+            canAttack = false;
+            slashAnim = Instantiate(slashAnimPrefab, attackPoint.position, Quaternion.identity);
+            slashAnim.transform.parent = this.transform.parent;
+            StartCoroutine(AttackCooldown());
+        }
+
     }
 
+    private IEnumerator AttackCooldown()
+    {
+        yield return new WaitForSeconds(SwordAttackCD);
+        isAttacking = false;
+    }
 
     public void OnAnimationComplete()
     {
         canAttack = true;
     }
 
-
+    void Start()
+    {
+        playerControls.Combat.Attack.started += _ => StartAttacking();
+        playerControls.Combat.Attack.canceled += _ => StopAttacking();
+    }
     void Update()
     {
         MouseFollowWithOffset();
+        Attack();
     }
 
-    public void SwingUpFlipAnim()
+    public void DoneAttackingAnimEvent()
+    {
+        weaponCollider.enabled = false;
+    }
+
+    public void SwingUpFlipAnimEvent()
     {
 
         slashAnim.gameObject.transform.rotation = Quaternion.Euler(-180, 0, 0);
@@ -78,26 +102,22 @@ public class Sword : MonoBehaviour
         }
     }
 
-    public void SwingDownFlipAnim()
+    public void SwingDownFlipAnimEvent()
     {
-        if (slashAnim != null)
-        {
-            slashAnim.transform.rotation = Quaternion.Euler(0, 0, 0);
 
-            if (playerMovement.FacingLeft)
+        slashAnim.transform.rotation = Quaternion.Euler(0, 0, 0);
+
+        if (playerMovement.FacingLeft)
+        {
+            SpriteRenderer spriteRenderer = slashAnim.GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null)
             {
-                SpriteRenderer spriteRenderer = slashAnim.GetComponent<SpriteRenderer>();
-                if (spriteRenderer != null)
-                {
-                    spriteRenderer.flipX = true;
-                }
+                spriteRenderer.flipX = true;
             }
         }
-        else
-        {
-            Debug.LogWarning("Attempted to access a destroyed or uninitialized slash animation GameObject.");
-        }
     }
+
+
 
 
     private void MouseFollowWithOffset()
@@ -113,11 +133,13 @@ public class Sword : MonoBehaviour
             angle = Mathf.Atan2(toMouse.y, -toMouse.x) * Mathf.Rad2Deg;
             float clampedAngle = Mathf.Clamp(angle, -25, 25);
             activeWeapon.transform.rotation = Quaternion.Euler(0, -180, clampedAngle);
+            weaponCollider.transform.rotation = Quaternion.Euler(0, -180, 0);
         }
         else
         {
             float clampedAngle = Mathf.Clamp(angle, -25, 25);
             activeWeapon.transform.rotation = Quaternion.Euler(0, 0, clampedAngle);
+            weaponCollider.transform.rotation = Quaternion.Euler(0, -0, 0);
         }
     }
 

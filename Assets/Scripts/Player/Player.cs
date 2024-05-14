@@ -5,11 +5,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player Instance;
+
     private PlayerMovement playerMovement;
     private PlayerInputs playerInputs;
 
     private void Awake()
     {
+        Instance = this;
         playerMovement = GetComponent<PlayerMovement>();
         playerInputs = GetComponent<PlayerInputs>();
     }
