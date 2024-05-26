@@ -4,20 +4,25 @@ using UnityEngine;
 
 public class Sword : MonoBehaviour
 {
+    [Header("Sword Attributes")]
     [SerializeField] private GameObject slashAnimPrefab;
     [SerializeField] private Transform attackPoint;
     [SerializeField] private PolygonCollider2D weaponCollider;
-    [SerializeField] private float SwordAttackCD = 0.5f;
+
+
+    [Header("Attack Settings")]
+    [SerializeField, Tooltip("Cooldown time between attacks in seconds.")]
+    private float SwordAttackCD = 0.5f;
+
+
     private PlayerControls playerControls;
     private Animator animator;
-    private bool canAttack = true;
     private Player player;
-
     private PlayerMovement playerMovement;
     private ActiveWeapon activeWeapon;
-
     private GameObject slashAnim;
     private bool attackButtonPressed, isAttacking = false;
+    private bool canAttack = true;
 
     private void Awake()
     {
@@ -28,25 +33,17 @@ public class Sword : MonoBehaviour
         playerMovement = GetComponentInParent<PlayerMovement>();
     }
 
-    private void OnEnable()
-    {
-        playerControls.Enable();
 
+    void Start()
+    {
+        playerControls.Combat.Attack.started += _ => StartAttacking();
+        playerControls.Combat.Attack.canceled += _ => StopAttacking();
     }
 
-    private void OnDisable()
+    void Update()
     {
-        playerControls.Disable();
-    }
-
-    private void StartAttacking()
-    {
-        attackButtonPressed = true;
-    }
-
-    private void StopAttacking()
-    {
-        attackButtonPressed = false;
+        MouseFollowWithOffset();
+        Attack();
     }
 
     private void Attack()
@@ -70,20 +67,55 @@ public class Sword : MonoBehaviour
         isAttacking = false;
     }
 
+
+    private void MouseFollowWithOffset()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        Vector3 playerScreenPoint = Camera.main.WorldToScreenPoint(player.transform.position);
+        Vector3 toMouse = mousePos - playerScreenPoint;
+
+        float angle = Mathf.Atan2(toMouse.y, toMouse.x) * Mathf.Rad2Deg;
+
+        if (mousePos.x < playerScreenPoint.x)
+        {
+            angle = Mathf.Atan2(toMouse.y, -toMouse.x) * Mathf.Rad2Deg;
+            float clampedAngle = Mathf.Clamp(angle, -25, 25);
+            activeWeapon.transform.rotation = Quaternion.Euler(0, -180, clampedAngle);
+            weaponCollider.transform.rotation = Quaternion.Euler(0, -180, 0);
+        }
+        else
+        {
+            float clampedAngle = Mathf.Clamp(angle, -25, 25);
+            activeWeapon.transform.rotation = Quaternion.Euler(0, 0, clampedAngle);
+            weaponCollider.transform.rotation = Quaternion.Euler(0, -0, 0);
+        }
+    }
+
+
+    private void StartAttacking()
+    {
+        attackButtonPressed = true;
+    }
+
+    private void StopAttacking()
+    {
+        attackButtonPressed = false;
+    }
+
+    private void OnEnable()
+    {
+        playerControls.Enable();
+
+    }
+
+    private void OnDisable()
+    {
+        playerControls.Disable();
+    }
+
     public void OnAnimationComplete()
     {
         canAttack = true;
-    }
-
-    void Start()
-    {
-        playerControls.Combat.Attack.started += _ => StartAttacking();
-        playerControls.Combat.Attack.canceled += _ => StopAttacking();
-    }
-    void Update()
-    {
-        MouseFollowWithOffset();
-        Attack();
     }
 
     public void DoneAttackingAnimEvent()
@@ -116,34 +148,6 @@ public class Sword : MonoBehaviour
             }
         }
     }
-
-
-
-
-    private void MouseFollowWithOffset()
-    {
-        Vector3 mousePos = Input.mousePosition;
-        Vector3 playerScreenPoint = Camera.main.WorldToScreenPoint(player.transform.position);
-        Vector3 toMouse = mousePos - playerScreenPoint;
-
-        float angle = Mathf.Atan2(toMouse.y, toMouse.x) * Mathf.Rad2Deg;
-
-        if (mousePos.x < playerScreenPoint.x)
-        {
-            angle = Mathf.Atan2(toMouse.y, -toMouse.x) * Mathf.Rad2Deg;
-            float clampedAngle = Mathf.Clamp(angle, -25, 25);
-            activeWeapon.transform.rotation = Quaternion.Euler(0, -180, clampedAngle);
-            weaponCollider.transform.rotation = Quaternion.Euler(0, -180, 0);
-        }
-        else
-        {
-            float clampedAngle = Mathf.Clamp(angle, -25, 25);
-            activeWeapon.transform.rotation = Quaternion.Euler(0, 0, clampedAngle);
-            weaponCollider.transform.rotation = Quaternion.Euler(0, -0, 0);
-        }
-    }
-
-
 
 }
 

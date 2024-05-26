@@ -1827,6 +1827,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1294911176894724063, guid: 1c51f9bb097c7ea4094524591f5caba6, type: 3}
+      propertyPath: SwordAttackCD
+      value: 0.55
+      objectReference: {fileID: 0}
     - target: {fileID: 3274999859418437645, guid: 1c51f9bb097c7ea4094524591f5caba6, type: 3}
       propertyPath: dashCD
       value: 2
