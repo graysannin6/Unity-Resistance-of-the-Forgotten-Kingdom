@@ -52,10 +52,11 @@ public class Sword : MonoBehaviour
         {
             isAttacking = true;
             animator.SetTrigger("Attack");
+            transform.root.tag = "Sword";
             weaponCollider.enabled = true;
             canAttack = false;
-            slashAnim = Instantiate(slashAnimPrefab, attackPoint.position, Quaternion.identity);
-            slashAnim.transform.parent = this.transform.parent;
+            //slashAnim = Instantiate(slashAnimPrefab, attackPoint.position, Quaternion.identity);
+            //slashAnim.transform.parent = this.transform.parent;
             StartCoroutine(AttackCooldown());
         }
 
@@ -65,6 +66,7 @@ public class Sword : MonoBehaviour
     {
         yield return new WaitForSeconds(SwordAttackCD);
         isAttacking = false;
+
     }
 
 
@@ -121,32 +123,33 @@ public class Sword : MonoBehaviour
     public void DoneAttackingAnimEvent()
     {
         weaponCollider.enabled = false;
+        transform.root.tag = "Untagged";
     }
 
     public void SwingUpFlipAnimEvent()
     {
 
-        slashAnim.gameObject.transform.rotation = Quaternion.Euler(-180, 0, 0);
+        //slashAnim.gameObject.transform.rotation = Quaternion.Euler(-180, 0, 0);
 
-        if (playerMovement.FacingLeft)
+        /*if (playerMovement.FacingLeft)
         {
             slashAnim.GetComponent<SpriteRenderer>().flipX = true;
-        }
+        }*/
     }
 
     public void SwingDownFlipAnimEvent()
     {
 
-        slashAnim.transform.rotation = Quaternion.Euler(0, 0, 0);
+        //slashAnim.transform.rotation = Quaternion.Euler(0, 0, 0);
 
-        if (playerMovement.FacingLeft)
+        /*if (playerMovement.FacingLeft)
         {
             SpriteRenderer spriteRenderer = slashAnim.GetComponent<SpriteRenderer>();
             if (spriteRenderer != null)
             {
                 spriteRenderer.flipX = true;
             }
-        }
+        }*/
     }
 
 }
