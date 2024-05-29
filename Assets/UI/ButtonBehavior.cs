@@ -6,16 +6,17 @@ using UnityEngine.SceneManagement;
 
 
 public class ButtonBehavior : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
+{   
+    public string _newGameLevel;
+
+    public void NewGameDialogYes()
     {
-        
+        SceneManager.LoadScene(_newGameLevel);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ExitButton()
     {
-        
+        Application.Quit();
     }
+    
 }
