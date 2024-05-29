@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -9,21 +8,45 @@ public class Enemy : MonoBehaviour
     public float force = 50.0f;
     public float minimumDistToAvoid = 5.0f;
     public float targetReachedRadius = 0.5f;
+    public float avoidanceRadius = 1.5f;
 
-    private float curSpeed;
+    [SerializeField] private int maxHealth = 3;
+    private int currentHealth;
+
     private Vector3 targetPoint;
     private SpriteRenderer spriteRenderer;
     private ObjectPool objectPool;
+    private Push pushed;
+    private Flash flash;
+    private Animator animator;
+    private bool isDead = false;
+    private Rigidbody2D rb;
 
     void Start()
     {
         targetPoint = Vector3.zero;
         spriteRenderer = GetComponent<SpriteRenderer>();
         objectPool = FindObjectOfType<ObjectPool>();
+        pushed = GetComponent<Push>();
+        currentHealth = maxHealth;
+        flash = GetComponent<Flash>();
+        animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
+        if (isDead)
+        {
+            rb.velocity = Vector2.zero;
+            return;
+        }
+
+        if (pushed != null && pushed.GettingKnockedBack)
+        {
+            return;
+        }
+
         GameObject player = GameObject.FindObjectOfType<Player>().gameObject;
         if (player != null)
         {
@@ -32,57 +55,53 @@ public class Enemy : MonoBehaviour
 
         Vector3 dir = (targetPoint - transform.position).normalized;
 
-        AvoidObstacles(ref dir);
-        AvoidEnemies(ref dir);
+        Vector2 avoidanceForce = CalculateAvoidanceForce();
+        dir += (Vector3)avoidanceForce;
+        dir = dir.normalized;
 
         if (Vector3.Distance(targetPoint, transform.position) < targetReachedRadius)
             return;
 
-        curSpeed = speed * Time.deltaTime;
-
-        // Move the enemy towards the target
-        transform.position += dir * curSpeed;
+        rb.velocity = dir * speed;
 
         if (player != null)
         {
             if (player.transform.position.x < transform.position.x)
             {
-                spriteRenderer.flipX = true; // Flip sprite to face left
+                spriteRenderer.flipX = true;
             }
             else
             {
-                spriteRenderer.flipX = false; // Face right
+                spriteRenderer.flipX = false;
             }
         }
     }
 
-    public void AvoidObstacles(ref Vector3 dir)
+    private Vector2 CalculateAvoidanceForce()
     {
+        Vector2 avoidanceForce = Vector2.zero;
+
+        // Avoid obstacles
         int layerMask = 1 << 8;
-
-        RaycastHit2D hit = Physics2D.CircleCast(transform.position, enemyRadius, dir, minimumDistToAvoid, layerMask);
-        if (hit.collider != null)
+        RaycastHit2D obstacleHit = Physics2D.CircleCast(transform.position, enemyRadius, rb.velocity, minimumDistToAvoid, layerMask);
+        if (obstacleHit.collider != null)
         {
-            Vector2 hitNormal = hit.normal;
-            Vector3 hitNormal3D = new Vector3(hitNormal.x, hitNormal.y, 0);
-            dir = (dir + hitNormal3D * force).normalized;
+            Vector2 hitNormal = obstacleHit.normal;
+            avoidanceForce += hitNormal * force;
         }
-    }
 
-    public void AvoidEnemies(ref Vector3 dir)
-    {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, enemyRadius);
-
-        foreach (var hit in hitEnemies)
+        // Avoid other enemies
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, avoidanceRadius);
+        foreach (var enemyHit in hitEnemies)
         {
-            if (hit.gameObject != this.gameObject && hit.CompareTag("Enemy"))
+            if (enemyHit.gameObject != this.gameObject && enemyHit.CompareTag("Enemy"))
             {
-                Vector3 hitNormal = transform.position - hit.transform.position;
-                dir += hitNormal.normalized * force;
+                Vector2 hitNormal = (Vector2)(transform.position - enemyHit.transform.position).normalized;
+                avoidanceForce += hitNormal * force;
             }
         }
 
-        dir = dir.normalized;
+        return avoidanceForce.normalized;
     }
 
     void OnDrawGizmosSelected()
@@ -91,12 +110,47 @@ public class Enemy : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, enemyRadius);
     }
 
+    public void TakeDamage(int damage, Transform damageSource)
+    {
+        currentHealth -= damage;
+        StartCoroutine(flash.FlashWhite());
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            pushed?.Knockback(damageSource, force);
+        }
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Sword"))
         {
-            // Return the enemy to the pool instead of destroying it
-            objectPool.ReturnToPool(gameObject);
+            TakeDamage(1, collision.transform);
         }
     }
+
+    public void ResetHealth()
+    {
+        currentHealth = maxHealth;
+        isDead = false;
+        animator.ResetTrigger("Die");
+        animator.Play("Idle");
+    }
+
+    private void Die()
+    {
+        isDead = true;
+        animator.SetTrigger("Die");
+        StartCoroutine(ReturnToPoolAfterDeath());
+    }
+
+    private IEnumerator ReturnToPoolAfterDeath()
+    {
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        objectPool.ReturnToPool(gameObject);
+    }
+
 }

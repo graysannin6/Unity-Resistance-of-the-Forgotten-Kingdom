@@ -15,6 +15,8 @@ public class EnemySpawner : MonoBehaviour
     private int enemiesSpawned;
     private float waveTimer;
     private float spawnTimer;
+    private bool bossActive = false;
+
 
     void Update()
     {
@@ -29,6 +31,11 @@ public class EnemySpawner : MonoBehaviour
 
     void StartNewWave()
     {
+        if (bossActive)
+        {
+            return;
+        }
+
         currentWave++;
         enemiesSpawned = 0;
 
@@ -64,6 +71,21 @@ public class EnemySpawner : MonoBehaviour
         GameObject boss = Instantiate(bossPrefab);
         boss.transform.position = spawnPoints[spawnIndex].position;
         boss.SetActive(true);
+
+        Boss bossComponent = boss.GetComponent<Boss>();
+        if (bossComponent != null)
+        {
+            bossComponent.OnBossDeath += ResumeSpawning;
+        }
+
+        bossActive = true;
+    }
+
+    void ResumeSpawning()
+    {
+        bossActive = false;
+        waveTimer = 0f;
+        StartNewWave();
     }
 }
 
