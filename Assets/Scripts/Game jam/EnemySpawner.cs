@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public ObjectPool objectPool; // Reference to the ObjectPool script
+    public ObjectPool objectPool;
     public GameObject bossPrefab;
     public Transform[] spawnPoints;
     public int enemiesPerWave = 10;
@@ -16,7 +16,6 @@ public class EnemySpawner : MonoBehaviour
     private float waveTimer;
     private float spawnTimer;
     private bool bossActive = false;
-
 
     void Update()
     {

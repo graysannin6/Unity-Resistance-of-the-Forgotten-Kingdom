@@ -108,7 +108,7 @@ MonoBehaviour:
   minimumDistToAvoid: 3.55
   targetReachedRadius: 0.5
   avoidanceRadius: 1.5
-  maxHealth: 1
+  maxHealth: 2
 --- !u!95 &-5032126787243796747
 Animator:
   serializedVersion: 5

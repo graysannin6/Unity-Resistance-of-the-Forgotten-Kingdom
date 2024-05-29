@@ -2,28 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss : MonoBehaviour
+public class Boss : BaseEnemy
 {
     public delegate void BossDeathDelegate();
     public event BossDeathDelegate OnBossDeath;
 
-    private int health = 100;
-
-    public void TakeDamage(int damage)
+    protected override void Start()
     {
-        health -= damage;
-        if (health <= 0)
-        {
-            Die();
-        }
+        base.Start();
+        maxHealth = 1;
+        currentHealth = maxHealth;
     }
 
-    private void Die()
+    protected override void Die()
     {
-        if (OnBossDeath != null)
-        {
-            OnBossDeath.Invoke();
-        }
+        base.Die();
+        OnBossDeath?.Invoke();
+    }
+
+    protected override IEnumerator ReturnToPoolAfterDeath()
+    {
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         Destroy(gameObject);
     }
 }
