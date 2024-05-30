@@ -11,10 +11,28 @@ public class ButtonBehavior : MonoBehaviour
     [Header("Volume Setting")]
     [SerializeField] private Slider _volumeSlider = null;
     [SerializeField] private TMP_Text _volumeTextValue = null;
-    [SerializeField] private float _defaultVolume = 0.5f; 
-    
+    [SerializeField] private float _defaultVolume = 0.5f;
+
+    [Header("Screen Settings")]
+    [SerializeField] private Slider _brightnessSlider = null;
+    [SerializeField] private TMP_Text _brightnessTextValue = null;
+    [SerializeField] private float _defaultBrightness = 0.5f;
+
+    [Space(10)]
+    [SerializeField] private TMP_Dropdown _qualityDropdown;
+    [SerializeField] private Toggle _fullScreenToggle;
+
+
+    private int _qualityLevel;
+    private bool _isFullScreen;
+    private float _brightnessLevel;
+
+    [Header("Resolution Dropdown")]
+    public TMP_Dropdown _resolutionDropdown;
+    private Resolution[] _resolutions;
+
     [Header("Confirmation")]
-    [SerializeField] private GameObject comfirmationPrompt = null;
+    [SerializeField] private GameObject _confirmationPrompt = null;
 
     [Header("New Game Level")]
     public string _newGameLevel;
@@ -107,7 +125,7 @@ public class ButtonBehavior : MonoBehaviour
         StartCoroutine(ConfirmationBox());
     }
 
-    public void ResetVolume(string MenuType)
+    public void Reset(string MenuType)
     {
         if(MenuType == "Audio")
         {
@@ -115,14 +133,95 @@ public class ButtonBehavior : MonoBehaviour
             _volumeSlider.value = _defaultVolume;
             _volumeTextValue.text = _defaultVolume.ToString("0.0");
         }
+
+        if(MenuType == "Screen")
+        {
+            _brightnessSlider.value = _defaultBrightness;
+            _brightnessTextValue.text = _defaultBrightness.ToString("0.0");
+
+            _qualityDropdown.value = 1;
+            QualitySettings.SetQualityLevel(1);
+
+            _fullScreenToggle.isOn = false;
+            Screen.fullScreen = false;
+
+            Resolution currentResolution = Screen.currentResolution;
+            Screen.SetResolution(currentResolution.width, currentResolution.height, Screen.fullScreen);
+            _resolutionDropdown.value = _resolutions.Length;
+            GraphicsApply();
+
+        }
     }
 
     public IEnumerator ConfirmationBox()
     {
-        comfirmationPrompt.SetActive(true);
+        _confirmationPrompt.SetActive(true);
         yield return new WaitForSeconds(2);
-        comfirmationPrompt.SetActive(false);
+        _confirmationPrompt.SetActive(false);
     }
+
+    // SCREEN SETTINGS FUNCTIONS
+
+    public void SetBrightness(float brightness)
+    {   
+        _brightnessLevel = brightness;
+        _brightnessTextValue.text = brightness.ToString("0.0");  
+    }
+
+    public void SetFullScreen(bool isFullScreen)
+    {
+        _isFullScreen = isFullScreen;
+    }
+
+    public void SetQuality(int qualityIndex)
+    {   
+        _qualityLevel = qualityIndex;  
+    }
+
+    public void GraphicsApply()
+    {
+        PlayerPrefs.SetFloat("masterBrightness", _brightnessLevel);
+
+        PlayerPrefs.SetInt("masterQuality", _qualityLevel);
+        QualitySettings.SetQualityLevel(_qualityLevel);
+
+        PlayerPrefs.SetInt("masterFullScreen", _isFullScreen ? 1 : 0);
+        Screen.fullScreen = _isFullScreen;
+        StartCoroutine(ConfirmationBox());
+    }
+
+    // RESOLUTION SETTINGS FUNCTIONS
+    private void Start()
+    {
+        _resolutions = Screen.resolutions;
+        _resolutionDropdown.ClearOptions();
+
+        List<string> options = new List<string>();
+
+        int currentResolutionIndex = 0;
+
+        for(int i = 0; i < _resolutions.Length; i++)
+        {
+            string option = _resolutions[i].width + " x " + _resolutions[i].height;
+            options.Add(option);
+
+            if(_resolutions[i].width == Screen.width && _resolutions[i].height == Screen.height)
+            {
+                currentResolutionIndex = i;
+            }
+        } 
+
+        _resolutionDropdown.AddOptions(options);
+        _resolutionDropdown.value = currentResolutionIndex;
+        _resolutionDropdown.RefreshShownValue(); 
+    }
+
+    public void SetResolution(int resolutionIndex)
+    {
+        Resolution resolution = _resolutions[resolutionIndex];
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+    }
+
 
     // ESSENTIAL FUNCTION FOR QUIT THE GAME AFTER PRESS QUIT
     public void ExitButton()
