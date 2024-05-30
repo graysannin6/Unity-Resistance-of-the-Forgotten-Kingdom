@@ -17,8 +17,11 @@ public class PlayerMovement : MonoBehaviour
     private GameObject shadow;
     private PlayerInputs playerInputs;
     private float startingMoveSpeed;
+    public static PlayerMovement Instance;
+
     private void Awake()
     {
+        Instance = this;
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         shadow = gameObject.transform.GetChild(1).gameObject;
@@ -54,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
             facingLeft = false;
         }
     }
+
 
     private void Dash()
     {

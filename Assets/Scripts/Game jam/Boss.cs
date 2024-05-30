@@ -10,7 +10,7 @@ public class Boss : BaseEnemy
     protected override void Start()
     {
         base.Start();
-        maxHealth = 1;
+        maxHealth = 10;
         currentHealth = maxHealth;
     }
 

@@ -127,7 +127,7 @@ MonoBehaviour:
   speed: 1
   force: 170.6
   minimumDistToAvoid: 3.55
-  targetReachedRadius: 0.5
+  targetReachedRadius: 1.5
   avoidanceRadius: 1.5
   maxHealth: 3
 --- !u!114 &-8351364540666499751

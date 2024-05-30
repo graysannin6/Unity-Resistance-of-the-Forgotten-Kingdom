@@ -21,6 +21,7 @@ public class BaseEnemy : MonoBehaviour
     protected Flash flash;
     protected Animator animator;
     protected bool isDead = false;
+    protected bool isAttacking = false;
     protected Rigidbody2D rb;
 
     protected virtual void Start()
@@ -59,9 +60,23 @@ public class BaseEnemy : MonoBehaviour
         Vector2 avoidanceForce = CalculateAvoidanceForce();
         dir += (Vector3)avoidanceForce;
         dir = dir.normalized;
+        float distanceToTarget = Vector3.Distance(targetPoint, transform.position);
 
-        if (Vector3.Distance(targetPoint, transform.position) < targetReachedRadius)
-            return;
+        if (distanceToTarget < targetReachedRadius)
+        {
+            if (!isAttacking)
+            {
+                Attack();
+            }
+        }
+        else
+        {
+            if (isAttacking)
+            {
+                Idle();
+            }
+            rb.velocity = dir * speed;
+        }
 
         rb.velocity = dir * speed;
 
@@ -132,7 +147,9 @@ public class BaseEnemy : MonoBehaviour
     {
         currentHealth = maxHealth;
         isDead = false;
+        isAttacking = false;
         animator.ResetTrigger("Die");
+        animator.ResetTrigger("Attack");
         animator.Play("Idle");
     }
 
@@ -147,5 +164,18 @@ public class BaseEnemy : MonoBehaviour
     {
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
         objectPool.ReturnToPool(gameObject);
+    }
+
+    protected virtual void Attack()
+    {
+        rb.velocity = Vector2.zero;
+        animator.SetBool("IsAttacking", true);
+        isAttacking = true;
+    }
+
+    protected virtual void Idle()
+    {
+        animator.SetBool("IsAttacking", false);
+        isAttacking = false;
     }
 }
