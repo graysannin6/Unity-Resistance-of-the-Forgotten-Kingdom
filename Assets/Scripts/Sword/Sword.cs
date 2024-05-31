@@ -12,6 +12,7 @@ public class Sword : MonoBehaviour, IWeapon
     [Header("Attack Settings")]
     [SerializeField, Tooltip("Cooldown time between attacks in seconds.")]
     private float SwordAttackCD = 0.5f;
+    [SerializeField] private WeaponInfo weaponInfo;
 
 
 
@@ -32,24 +33,19 @@ public class Sword : MonoBehaviour, IWeapon
 
     }
 
+    public WeaponInfo GetWeaponInfo()
+    {
+        return weaponInfo;
+    }
+
     public void Attack()
     {
-        //isAttacking = true;
         animator.SetTrigger("Attack");
         transform.root.tag = "Sword";
         weaponCollider.enabled = true;
         canAttack = false;
         //slashAnim = Instantiate(slashAnimPrefab, attackPoint.position, Quaternion.identity);
         //slashAnim.transform.parent = this.transform.parent;
-        StartCoroutine(AttackCooldown());
-
-    }
-
-    private IEnumerator AttackCooldown()
-    {
-        yield return new WaitForSeconds(SwordAttackCD);
-        ActiveWeapon.Instance.ToggleisAttacking(false);
-
     }
 
 
