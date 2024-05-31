@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -134,7 +134,175 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: dash_bar_sprite_0
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 17
+        width: 23
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8812c6c1f20ce5140afca8c79ea8c352
+      internalID: 913566102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dash_bar_sprite_1
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 17
+        width: 23
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58770ac223c4f0443b79f261b736bef9
+      internalID: 1395738351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dash_bar_sprite_2
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 17
+        width: 23
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3d2445c6906ba448bfbaf4f8e694c59
+      internalID: 116850529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dash_bar_sprite_3
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 17
+        width: 23
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 469a30ed863c932498fd1bf846d5c38d
+      internalID: -851901211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dash_bar_sprite_4
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 17
+        width: 23
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 470f3e56954fcf04fa08892cee7dbf48
+      internalID: 1061420496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dash_bar_sprite_5
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 17
+        width: 23
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7041d46d6f31bae44a84ffd2b5463cb9
+      internalID: 730186578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dash_bar_sprite_6
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 17
+        width: 23
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99ecdc4f6fa30c1468875715728fe3b9
+      internalID: 1788341370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dash_bar_sprite_7
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 17
+        width: 23
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a5f044dd4ea0e14aa646b7d908f6bf9
+      internalID: 103916842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -145,7 +313,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      dash_bar_sprite_0: 913566102
+      dash_bar_sprite_1: 1395738351
+      dash_bar_sprite_2: 116850529
+      dash_bar_sprite_3: -851901211
+      dash_bar_sprite_4: 1061420496
+      dash_bar_sprite_5: 730186578
+      dash_bar_sprite_6: 1788341370
+      dash_bar_sprite_7: 103916842
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
