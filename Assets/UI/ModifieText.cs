@@ -36,17 +36,21 @@ public class ModifieText : MonoBehaviour, IPointerDownHandler,IPointerUpHandler
         }
     }
     public void OnPointerDown(PointerEventData eventData)
-    {
-        RectTransform rectTransform = textx.GetComponent<RectTransform>();
-        rectTransform.anchoredPosition = new Vector2(originalPosition.x, originalPosition.y - yoffset);
-        textx.color = pressedColor;
+    {   
+        if(ButtonController.instance.canMoveText)
+        {
+            RectTransform rectTransform = textx.GetComponent<RectTransform>();
+            rectTransform.anchoredPosition = new Vector2(originalPosition.x, originalPosition.y - yoffset);
+            textx.color = pressedColor;
+        }
+        
         
         
         
     }
 
     public void OnPointerUp(PointerEventData eventData)
-    {
+    {   
         RectTransform rectTransform = textx.GetComponent<RectTransform>();
         rectTransform.anchoredPosition = originalPosition;
         Color colorFullAlpha = originalColor;
