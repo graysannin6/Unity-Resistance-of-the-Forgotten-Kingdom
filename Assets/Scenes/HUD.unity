@@ -498,6 +498,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 197bac544c252884e8f69ca8a9645f9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 8
+  chipSpeed: 2
+  frontHealthBar: {fileID: 2114950566}
+  backHealthBar: {fileID: 2017723338}
 --- !u!1 &1633672104
 GameObject:
   m_ObjectHideFlags: 0
