@@ -9,7 +9,7 @@ public class PlayerHealth : MonoBehaviour
     
     private float health;
     private float lerpTimer;
-    public float maxHealth = 8;
+    public float maxHealth = 100f;
     public float chipSpeed = 2f;
     public Image frontHealthBar;
     public Image backHealthBar;
@@ -21,8 +21,7 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         health = maxHealth;
-        frontHealthBar.fillAmount = 1;
-        backHealthBar.fillAmount = 1;
+        
     }
 
     // Update is called once per frame
