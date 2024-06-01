@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -134,7 +134,196 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: RPG Style (2)_0
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 123
+        width: 73
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7de230c1b62ed9645a101e5c242a7a40
+      internalID: -521668189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG Style (2)_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 114
+        width: 73
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec4b3e289b280d4468173dec8573fa41
+      internalID: 120657433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG Style (2)_2
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 105
+        width: 73
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bb24e2680ac95a4aaff871ee5202dd9
+      internalID: -941764415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG Style (2)_3
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 94
+        width: 73
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 658c6828b26c1604998f1a8a9a05a2b1
+      internalID: -501988511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG Style (2)_4
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 85
+        width: 73
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 218af543d8b61f44f8202119b937e837
+      internalID: -1646157249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG Style (2)_5
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 76
+        width: 73
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff9b0576eb4777e44addc9eb0159cbab
+      internalID: 1796056697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG Style (2)_6
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 64
+        width: 73
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3e7c45ccf5eccc47bc92b6f8ce2cddc
+      internalID: -831984087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG Style (2)_7
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 55
+        width: 73
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b5fbd2856a20af439a4341b34d7657c
+      internalID: -653573012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RPG Style (2)_8
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 46
+        width: 73
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0071b548b5863b4ba46f9f009d30d1e
+      internalID: 1378801940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -145,7 +334,16 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      RPG Style (2)_0: -521668189
+      RPG Style (2)_1: 120657433
+      RPG Style (2)_2: -941764415
+      RPG Style (2)_3: -501988511
+      RPG Style (2)_4: -1646157249
+      RPG Style (2)_5: 1796056697
+      RPG Style (2)_6: -831984087
+      RPG Style (2)_7: -653573012
+      RPG Style (2)_8: 1378801940
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
