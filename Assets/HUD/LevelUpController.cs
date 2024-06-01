@@ -35,6 +35,7 @@ public class LevelUpController : MonoBehaviour
         {
             frontLevelUpBar.fillAmount = 0;
             levelUp = 1;
+            UpgradePanelController.instance.OpenUpgradePanel();
             
 
         }
