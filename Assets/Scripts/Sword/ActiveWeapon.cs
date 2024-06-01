@@ -34,7 +34,7 @@ public class ActiveWeapon : Singleton<ActiveWeapon>
         playerControls.Combat.Attack.started += _ => StartAttacking();
         playerControls.Combat.Attack.canceled += _ => StopAttacking();
 
-        AttackCooldown();
+        //AttackCooldown();
 
     }
 

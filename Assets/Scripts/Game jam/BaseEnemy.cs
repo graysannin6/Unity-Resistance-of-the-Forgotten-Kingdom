@@ -121,7 +121,7 @@ public class BaseEnemy : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, avoidanceRadius);
     }
 
-    public virtual void TakeDamage(int damage, Transform damageSource)
+    public virtual void TakeDamage(int damage, Transform damageSource, bool applyKnockback)
     {
         currentHealth -= damage;
         StartCoroutine(flash.FlashWhite());
@@ -129,19 +129,12 @@ public class BaseEnemy : MonoBehaviour
         {
             Die();
         }
-        else
+        else if (applyKnockback && pushed != null)
         {
-            pushed?.Knockback(damageSource, force);
+            pushed.Knockback(damageSource, force);
         }
     }
 
-    protected virtual void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Sword"))
-        {
-            TakeDamage(1, collision.transform);
-        }
-    }
 
     public virtual void ResetHealth()
     {
@@ -177,5 +170,15 @@ public class BaseEnemy : MonoBehaviour
     {
         animator.SetBool("IsAttacking", false);
         isAttacking = false;
+    }
+
+    public void TriggerTakeHitAnimation()
+    {
+        animator.SetTrigger("TakeHit");
+    }
+
+    public bool GetIsDead()
+    {
+        return isDead;
     }
 }

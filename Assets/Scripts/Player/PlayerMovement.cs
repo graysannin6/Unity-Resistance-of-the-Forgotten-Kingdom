@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerInputs playerInputs;
     private float startingMoveSpeed;
     public static PlayerMovement Instance;
+    private Collider2D playerCollider;
 
     private void Awake()
     {
@@ -26,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         shadow = gameObject.transform.GetChild(1).gameObject;
         playerInputs = GetComponent<PlayerInputs>();
+        playerCollider = GetComponent<Collider2D>();
     }
 
     private void Start()
@@ -66,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
             isDashing = true;
             moveSpeed *= dashSpeed;
             trailRenderer.emitting = true;
+            playerCollider.enabled = false;
             StartCoroutine(EndDashRoutine());
         }
 
@@ -77,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(dashDuration);
         moveSpeed = startingMoveSpeed;
         trailRenderer.emitting = false;
+        playerCollider.enabled = true;
         yield return new WaitForSeconds(dashCD);
         isDashing = false;
     }

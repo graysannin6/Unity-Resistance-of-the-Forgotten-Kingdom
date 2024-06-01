@@ -72,10 +72,6 @@ public class Sword : MonoBehaviour, IWeapon
         }
     }
 
-
-
-
-
     public void OnAnimationComplete()
     {
         canAttack = true;
