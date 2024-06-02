@@ -10,12 +10,12 @@ public class Boss : BaseEnemy
     private Vector3 designatedPosition = new Vector3(4.54f, -21f, 0f);
     private bool reachedDesignatedPosition = false;
 
-    private IEnemy enemy;
+    private Shooter shooter;
 
     protected override void Start()
     {
-        enemy = GetComponent<IEnemy>();
         base.Start();
+        shooter = GetComponent<Shooter>();
         maxHealth = 10;
         currentHealth = maxHealth;
     }
@@ -71,8 +71,26 @@ public class Boss : BaseEnemy
 
     private void PerformDesignatedActions()
     {
-        enemy.Attack();
+        UpdateBurstPattern();
+        shooter.Attack();
         animator.SetTrigger("Fire");
+    }
+
+    private void UpdateBurstPattern()
+    {
+        float healthFraction = (float)currentHealth / maxHealth;
+        if (healthFraction > 0.66f)
+        {
+            shooter.SetBurstPattern(1);
+        }
+        else if (healthFraction > 0.33f)
+        {
+            shooter.SetBurstPattern(2);
+        }
+        else
+        {
+            shooter.SetBurstPattern(3);
+        }
     }
 
     protected override void Die()

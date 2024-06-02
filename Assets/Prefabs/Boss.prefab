@@ -236,5 +236,8 @@ MonoBehaviour:
   projectilePrefab: {fileID: 1388671655791291424, guid: 8c044b38d2900a14da825fe6d793f050, type: 3}
   projectileMoveSpeed: 6
   burstCount: 5
-  timeBetweenBursts: 0.3
+  projectilesPerBurst: 10
+  angleSpread: 44
+  startingDistance: 0.1
+  timeBetweenBursts: 1.5
   restTime: 0.5
