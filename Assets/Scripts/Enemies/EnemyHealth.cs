@@ -4,50 +4,77 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] private int startingHealth = 3;
+    [SerializeField] protected int maxHealth = 3;
     [SerializeField] private GameObject deathEffect;
     [SerializeField] private float knockbackthrust = 15f;
-    private int currentHealth;
-    private KnockBack knockBack;
-    private Flash flash;
+    protected int currentHealth;
+    protected Vector3 targetPoint;
+    protected SpriteRenderer spriteRenderer;
+    protected ObjectPool objectPool;
+    protected Push pushed;
+    protected Flash flash;
+    protected Animator animator;
+    public bool isDead = false;
+    protected bool isAttacking = false;
+    protected Rigidbody2D rb;
+    private EnemyAI enemyAI;
+
     private void Awake()
     {
+        targetPoint = Vector3.zero;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        objectPool = FindObjectOfType<ObjectPool>();
+        pushed = GetComponent<Push>();
+        currentHealth = maxHealth;
         flash = GetComponent<Flash>();
-        knockBack = GetComponent<KnockBack>();
+        animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+        enemyAI = GetComponent<EnemyAI>();
     }
 
     private void Start()
     {
-        currentHealth = startingHealth;
+        currentHealth = maxHealth;
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage, Transform damageSource, bool applyKnockback)
     {
         currentHealth -= damage;
-        Debug.Log("Enemy took damage. Current health: " + currentHealth);
-        knockBack.Knockback(Player.Instance.transform, knockbackthrust);
         StartCoroutine(flash.FlashWhite());
-        StartCoroutine(CheckDetectDeath());
-    }
-
-    private IEnumerator CheckDetectDeath()
-    {
-        yield return new WaitForSeconds(flash.GetFlashDuration());
-        DetectDeath();
-    }
-
-    private void DetectDeath()
-    {
         if (currentHealth <= 0)
         {
             Die();
         }
+        else if (applyKnockback && pushed != null)
+        {
+            pushed.Knockback(damageSource, knockbackthrust);
+        }
     }
 
-    private void Die()
+    public virtual void ResetHealth()
     {
-        Instantiate(deathEffect, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        currentHealth = maxHealth;
+        isDead = false;
+        enemyAI.state = EnemyAI.State.Chase;
+        isAttacking = false;
+        animator.ResetTrigger("Die");
+        animator.Play("Idle");
+        enemyAI.ResetState();
+    }
+
+    protected virtual void Die()
+    {
+        isDead = true;
+        animator.SetTrigger("Die");
+        StartCoroutine(ReturnToPoolAfterDeath());
+    }
+
+    protected virtual IEnumerator ReturnToPoolAfterDeath()
+    {
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        enemyAI.StopAllCoroutines(); // Stop AI coroutines
+        enemyAI.StopMovement(); // Stop movement
+        objectPool.ReturnToPool(gameObject);
     }
 
 

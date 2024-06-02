@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -4474614259954201395}
   - component: {fileID: 9118699300058405538}
   - component: {fileID: 598419230969744042}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Goblin
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ MonoBehaviour:
   speed: 3
   force: 170.6
   minimumDistToAvoid: 3.55
-  targetReachedRadius: 1.5
+  targetReachedRadius: 0.62
   avoidanceRadius: 1.5
   maxHealth: 2
 --- !u!95 &-5032126787243796747

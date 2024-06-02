@@ -16,7 +16,8 @@ GameObject:
   - component: {fileID: -4123620755951364975}
   - component: {fileID: -6291791717494869355}
   - component: {fileID: 3174757284293233053}
-  m_Layer: 0
+  - component: {fileID: 929462804647551195}
+  m_Layer: 7
   m_Name: Boss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -123,8 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a00258c4265202944829958080dafc81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackDuration: 0.2
-  knockbackSpeed: 0.1
+  knockbackDuration: 0
+  knockbackSpeed: 0
 --- !u!114 &7050123869844768331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,9 +172,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.017931104, y: -0.8606905}
+  m_Offset: {x: -0.017931104, y: -1.1114798}
   serializedVersion: 2
-  m_Radius: 0.86818826
+  m_Radius: 1.5115137
 --- !u!50 &-6291791717494869355
 Rigidbody2D:
   serializedVersion: 4
@@ -186,8 +187,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
+  m_Mass: 1000
+  m_LinearDrag: 100
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -214,9 +215,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyRadius: 1.3
-  speed: 3
-  force: 170
-  minimumDistToAvoid: 3.55
+  speed: 10
+  force: 325
+  minimumDistToAvoid: 5.51
   targetReachedRadius: 0.5
-  avoidanceRadius: 1.5
+  avoidanceRadius: 4
   maxHealth: 1
+--- !u!114 &929462804647551195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5281542330933435891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f0df240f1cbf9149a1c4298c9919464, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 1388671655791291424, guid: 8c044b38d2900a14da825fe6d793f050, type: 3}
+  projectileMoveSpeed: 6
+  burstCount: 5
+  timeBetweenBursts: 0.3
+  restTime: 0.5

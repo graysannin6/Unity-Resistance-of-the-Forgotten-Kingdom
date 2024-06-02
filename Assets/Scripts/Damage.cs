@@ -15,6 +15,7 @@ public class Damage : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         BaseEnemy enemy = other.gameObject.GetComponent<BaseEnemy>();
+        EnemyHealth enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
         enemy?.TakeDamage(damage, transform, true);
     }
 }

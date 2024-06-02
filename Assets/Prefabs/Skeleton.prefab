@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -5078840260938747059}
   - component: {fileID: 8879763857953114719}
   - component: {fileID: 4093752366942382510}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Skeleton
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ MonoBehaviour:
   speed: 4
   force: 170.6
   minimumDistToAvoid: 3.55
-  targetReachedRadius: 1.5
+  targetReachedRadius: 0.8
   avoidanceRadius: 1.5
   maxHealth: 3
 --- !u!114 &-8351364540666499751
@@ -190,9 +190,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.12551713, y: -0.1255176}
+  m_Offset: {x: 0.25732946, y: -0.05653751}
   serializedVersion: 2
-  m_Radius: 0.901551
+  m_Radius: 0.72412
 --- !u!50 &4093752366942382510
 Rigidbody2D:
   serializedVersion: 4

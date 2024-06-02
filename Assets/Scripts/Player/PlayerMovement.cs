@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private float startingMoveSpeed;
     public static PlayerMovement Instance;
     private Collider2D playerCollider;
+    private KnockBack knockBack;
 
     private void Awake()
     {
@@ -28,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
         shadow = gameObject.transform.GetChild(1).gameObject;
         playerInputs = GetComponent<PlayerInputs>();
         playerCollider = GetComponent<Collider2D>();
+        knockBack = GetComponent<KnockBack>();
     }
 
     private void Start()
@@ -38,6 +40,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move(Vector2 movementInput)
     {
+        if (knockBack.GettingKnockedBack)
+        {
+            return;
+        }
         rb.MovePosition(rb.position + movementInput * (moveSpeed * Time.fixedDeltaTime));
     }
 

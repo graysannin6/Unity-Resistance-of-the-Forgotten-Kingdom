@@ -19,12 +19,15 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        waveTimer += Time.deltaTime;
-
-        if (waveTimer >= waveInterval)
+        if (!bossActive)
         {
-            waveTimer = 0f;
-            StartNewWave();
+            waveTimer += Time.deltaTime;
+
+            if (waveTimer >= waveInterval && !IsInvoking("SpawnEnemy"))
+            {
+                waveTimer = 0f;
+                StartNewWave();
+            }
         }
     }
 
@@ -63,6 +66,7 @@ public class EnemySpawner : MonoBehaviour
         enemy.SetActive(true);
         enemiesSpawned++;
     }
+
 
     void SpawnBoss()
     {

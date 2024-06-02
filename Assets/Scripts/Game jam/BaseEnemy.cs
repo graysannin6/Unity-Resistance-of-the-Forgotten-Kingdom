@@ -64,29 +64,21 @@ public class BaseEnemy : MonoBehaviour
 
         if (distanceToTarget < targetReachedRadius)
         {
-            if (!isAttacking)
-            {
-                Attack();
-            }
+            rb.velocity = Vector2.zero;
         }
         else
         {
-            if (isAttacking)
-            {
-                Idle();
-            }
             rb.velocity = dir * speed;
         }
-
-        rb.velocity = dir * speed;
 
         if (player != null)
         {
             spriteRenderer.flipX = player.transform.position.x < transform.position.x;
         }
+
     }
 
-    protected virtual Vector2 CalculateAvoidanceForce()
+    public virtual Vector2 CalculateAvoidanceForce()
     {
         Vector2 avoidanceForce = Vector2.zero;
 
@@ -135,7 +127,6 @@ public class BaseEnemy : MonoBehaviour
         }
     }
 
-
     public virtual void ResetHealth()
     {
         currentHealth = maxHealth;
@@ -181,4 +172,28 @@ public class BaseEnemy : MonoBehaviour
     {
         return isDead;
     }
+
+    public bool IsAttacking()
+    {
+        return isAttacking;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        PlayerHealthManager player = collision.gameObject.GetComponent<PlayerHealthManager>();
+        if (player != null)
+        {
+            Attack();
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        PlayerHealthManager player = collision.gameObject.GetComponent<PlayerHealthManager>();
+        if (player != null)
+        {
+            Idle();
+        }
+    }
+
 }

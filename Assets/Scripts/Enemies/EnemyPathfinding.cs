@@ -7,16 +7,19 @@ public class EnemyPathfinding : MonoBehaviour
     [SerializeField] private float speed = 2f;
     private Rigidbody2D rb;
     private Vector2 moveDirection;
-    private KnockBack knockBack;
+    private Push knockBack;
+    private EnemyHealth enemyHealth;
+
     private void Awake()
     {
-        knockBack = GetComponent<KnockBack>();
+        knockBack = GetComponent<Push>();
         rb = GetComponent<Rigidbody2D>();
+        enemyHealth = GetComponent<EnemyHealth>();
     }
 
     private void FixedUpdate()
     {
-        if (knockBack.GettingKnockedBack)
+        if (knockBack.GettingKnockedBack || enemyHealth.isDead)
         {
             return;
         }
@@ -25,7 +28,13 @@ public class EnemyPathfinding : MonoBehaviour
 
     public void MoveTo(Vector2 targetPosition)
     {
-        moveDirection = targetPosition;
+        Vector2 direction = (targetPosition - rb.position).normalized;
+        moveDirection = direction;
+    }
+
+    public void StopMovement()
+    {
+        moveDirection = Vector2.zero;
     }
 
 }
