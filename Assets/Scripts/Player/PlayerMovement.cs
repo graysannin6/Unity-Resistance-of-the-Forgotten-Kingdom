@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -8,12 +9,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private float dashSpeed = 4f;
     [SerializeField] private float dashCD = 0.25f;
+    [SerializeField] private float dashDuration = 0.2f;
     [SerializeField] private TrailRenderer trailRenderer;
+    public Image frontDashBar;
+    public Image backDashBar;
 
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private bool facingLeft = false;
     private bool isDashing = false;
+    private float dashTimer;
     private GameObject shadow;
     private PlayerInputs playerInputs;
     private float startingMoveSpeed;
@@ -36,6 +41,17 @@ public class PlayerMovement : MonoBehaviour
     {
         playerInputs.GetPlayerControls().Combat.Dash.performed += _ => Dash();
         startingMoveSpeed = moveSpeed;
+        dashTimer = dashCD;
+        UpdateDashUI();
+    }
+
+    private void Update()
+    {
+        if (dashTimer < dashCD)
+        {
+            dashTimer += Time.deltaTime;
+            UpdateDashUI();
+        }
     }
 
     public void Move(Vector2 movementInput)
@@ -69,12 +85,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void Dash()
     {
-        if (!isDashing)
+        if (!isDashing && dashTimer >= dashCD)
         {
             isDashing = true;
             moveSpeed *= dashSpeed;
             trailRenderer.emitting = true;
             playerCollider.enabled = false;
+            dashTimer = 0f;
             StartCoroutine(EndDashRoutine());
         }
 
@@ -82,12 +99,18 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator EndDashRoutine()
     {
-        float dashDuration = 0.2f;
         yield return new WaitForSeconds(dashDuration);
         moveSpeed = startingMoveSpeed;
         trailRenderer.emitting = false;
         playerCollider.enabled = true;
-        yield return new WaitForSeconds(dashCD);
+        yield return new WaitForSeconds(dashCD - dashDuration);
         isDashing = false;
+    }
+
+    private void UpdateDashUI()
+    {
+        float fillAmount = Mathf.Clamp01(dashTimer / dashCD);
+        frontDashBar.fillAmount = fillAmount;
+        backDashBar.fillAmount = fillAmount;
     }
 }

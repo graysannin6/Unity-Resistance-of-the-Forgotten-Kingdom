@@ -18,7 +18,7 @@ public class LevelUpController : MonoBehaviour
     void Start()
     {
         levelUp = 0;
-        
+
     }
 
     // Update is called once per frame
@@ -26,20 +26,20 @@ public class LevelUpController : MonoBehaviour
     {
         levelUp = Mathf.Clamp(levelUp, 0, maxLevelUpBar);
         UpdateLevelUpUI();
-        if(Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             AddExperience(1);
         }
 
-        if(levelUp >= maxLevelUpBar + 1)
+        if (levelUp >= maxLevelUpBar + 1)
         {
             frontLevelUpBar.fillAmount = 0;
             levelUp = 1;
             UpgradePanelController.instance.OpenUpgradePanel();
-            
+
 
         }
-        
+
     }
 
     public void UpdateLevelUpUI()
@@ -47,8 +47,8 @@ public class LevelUpController : MonoBehaviour
         Debug.Log(levelUp);
         float fillFront = frontLevelUpBar.fillAmount;
         float hFraction = levelUp / maxLevelUpBar;
-        
-        if(fillFront < hFraction)
+
+        if (fillFront < hFraction)
         {
             frontLevelUpBar.fillAmount = hFraction;
             lerpTimer += Time.deltaTime;

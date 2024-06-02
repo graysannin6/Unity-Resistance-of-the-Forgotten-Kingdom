@@ -72,6 +72,7 @@ public class Boss : BaseEnemy
     private void PerformDesignatedActions()
     {
         enemy.Attack();
+        animator.SetTrigger("Fire");
     }
 
     protected override void Die()

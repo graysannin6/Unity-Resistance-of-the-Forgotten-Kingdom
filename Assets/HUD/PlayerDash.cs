@@ -8,8 +8,8 @@ public class PlayerDash : MonoBehaviour
     public Image frontDashBar;
     public Image backDashBar;
     public float maxDash = 100f;
-    public float dashRechargeDuration = 3f; 
-    public float dashUseAmount = 100f; 
+    public float dashRechargeDuration = 3f;
+    public float dashUseAmount = 100f;
 
     private float dash;
     private bool isRecharging;
@@ -43,7 +43,7 @@ public class PlayerDash : MonoBehaviour
     {
         float fillFront = dash / maxDash;
         frontDashBar.fillAmount = fillFront;
-        backDashBar.fillAmount = fillFront; 
+        backDashBar.fillAmount = fillFront;
     }
 
     private IEnumerator RestoreDash()
@@ -58,8 +58,6 @@ public class PlayerDash : MonoBehaviour
             UpdateDashUI();
             yield return null;
         }
-
-        // Ensure the dash bar is fully filled
         dash = maxDash;
         UpdateDashUI();
         isRecharging = false;
