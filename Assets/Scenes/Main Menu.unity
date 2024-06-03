@@ -5532,11 +5532,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: b42f36d921725af48ae503d21dccc3d9, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 3763abe0af7fb434e954512992302e11, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -6740,7 +6740,7 @@ MonoBehaviour:
   _fullScreenToggle: {fileID: 1842974144}
   _resolutionDropdown: {fileID: 1964765963}
   _confirmationPrompt: {fileID: 1636076886}
-  _newGameLevel: Last Stand
+  _newGameLevel: Story
   _panelStart: {fileID: 1612015533}
   _panelQuit: {fileID: 1350981151}
   _panelSettings: {fileID: 369727897}
