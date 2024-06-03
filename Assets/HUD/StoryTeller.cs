@@ -12,13 +12,11 @@ public class StoryTaller : MonoBehaviour
     {
         if (textWriter != null && messageText != null)
         {
-            string longText = "Once upon a time, in a faraway land, there was a tall tower. " +
-                              "This tower was home to many adventurers who sought to conquer its heights and uncover its secrets. " +
-                              "Among them was a brave warrior named Arin, who dreamed of reaching the top and finding the legendary treasure said to be hidden there. " +
-                              "With each step, the challenges grew harder, but Arin's resolve never wavered. " +
-                              "Through battles and puzzles, friendships and betrayals, the journey to the top of the tower was an epic tale of courage and determination. " +
-                              "As Arin climbed higher, the air grew thin and the view more breathtaking. The legend of the tower had captured the hearts of many, " +
-                              "but only the truly brave would ever discover its true nature.";
+            string longText = "In the kingdoms forgotten by time,"+ "\n" +
+                              " a final battle for survival is waged." + "\n" +
+                              " Endless waves of the vilest creatures emerge from the heart of the earth to devour and destroy all in their path." + "\n" +
+                              " After a tragic battle, a young king is the sole bulwark between his kingdom and annihilation." + "\n" +
+                              " Shall he find grace in the heavens, or will this be his last crusade?";
             textWriter.AddWriter(messageText, longText, 0.05f);
         }
         else
