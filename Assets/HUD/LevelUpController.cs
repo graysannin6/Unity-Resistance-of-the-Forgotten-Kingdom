@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelUpController : MonoBehaviour
+public class LevelUpController : Singleton<LevelUpController>
 {
     [Header("Level Up Bar")]
     private float levelUp;
@@ -12,24 +12,20 @@ public class LevelUpController : MonoBehaviour
     public float chipSpeed = 2f;
     public Image frontLevelUpBar;
 
+    protected override void Awake()
+    {
+        base.Awake();
+    }
 
-
-    // Start is called before the first frame update
     void Start()
     {
         levelUp = 0;
 
     }
-
-    // Update is called once per frame
     void Update()
     {
         levelUp = Mathf.Clamp(levelUp, 0, maxLevelUpBar);
         UpdateLevelUpUI();
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            AddExperience(1);
-        }
 
         if (levelUp >= maxLevelUpBar + 1)
         {
@@ -44,7 +40,6 @@ public class LevelUpController : MonoBehaviour
 
     public void UpdateLevelUpUI()
     {
-        Debug.Log(levelUp);
         float fillFront = frontLevelUpBar.fillAmount;
         float hFraction = levelUp / maxLevelUpBar;
 

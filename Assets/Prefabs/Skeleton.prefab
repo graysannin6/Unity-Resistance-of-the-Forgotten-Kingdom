@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -5078840260938747059}
   - component: {fileID: 8879763857953114719}
   - component: {fileID: 4093752366942382510}
+  - component: {fileID: -5831242546020993806}
   m_Layer: 7
   m_Name: Skeleton
   m_TagString: Enemy
@@ -33,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.84, y: -2.8, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -220,3 +221,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &-5831242546020993806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37041152700981677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16aa17ccf600caa4bbcf164f0a2851f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPickUpPrefab: {fileID: 1072486868725280543, guid: a6db5fc8dcbb15643a867657336dcf1c, type: 3}
+  healthPickUpPrefab: {fileID: 1094418280079385820, guid: ea7a3aeb302fd48439f9556cacac2960, type: 3}
