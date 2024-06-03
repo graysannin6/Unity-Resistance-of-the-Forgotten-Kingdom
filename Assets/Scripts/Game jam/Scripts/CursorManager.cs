@@ -1,32 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CursorManager : MonoBehaviour
 {
-    void Start()
+    [SerializeField] private Texture2D mainSceneCursor;
+    [SerializeField] private Texture2D gameSceneCursor;
+
+    private void Awake()
     {
-        Cursor.visible = false;
-
-        if (Application.isPlaying)
-        {
-            Cursor.lockState = CursorLockMode.None;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Confined;
-        }
-
-
+        DontDestroyOnLoad(gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    void Update()
+    private void OnDestroy()
     {
-        Vector2 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = cursorPos;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
 
-        //if (!Application.isPlaying) { return; }
-
-        //Cursor.visible = false;
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Main Menu")
+        {
+            Cursor.SetCursor(mainSceneCursor, Vector2.zero, CursorMode.Auto);
+        }
+        else if (scene.name == "Last Stand")
+        {
+            Cursor.SetCursor(gameSceneCursor, Vector2.zero, CursorMode.Auto);
+        }
     }
 }
