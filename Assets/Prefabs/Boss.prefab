@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -6291791717494869355}
   - component: {fileID: 3174757284293233053}
   - component: {fileID: 929462804647551195}
+  - component: {fileID: -5364969291403270410}
   m_Layer: 7
   m_Name: Boss
   m_TagString: Enemy
@@ -238,6 +239,20 @@ MonoBehaviour:
   burstCount: 5
   projectilesPerBurst: 10
   angleSpread: 44
-  startingDistance: 0.1
+  startingDistance: 2
   timeBetweenBursts: 1.5
   restTime: 0.5
+--- !u!114 &-5364969291403270410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5281542330933435891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16aa17ccf600caa4bbcf164f0a2851f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPickUpPrefab: {fileID: 1072486868725280543, guid: a6db5fc8dcbb15643a867657336dcf1c, type: 3}
+  healthPickUpPrefab: {fileID: 1094418280079385820, guid: ea7a3aeb302fd48439f9556cacac2960, type: 3}

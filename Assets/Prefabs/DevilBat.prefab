@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5405676425787369920}
   - component: {fileID: 6976105507165088278}
   - component: {fileID: 3770113520597783414}
+  - component: {fileID: 4126726610595116350}
   m_Layer: 7
   m_Name: DevilBat
   m_TagString: Enemy
@@ -223,3 +224,17 @@ MonoBehaviour:
   shootingRange: 10
   shootInterval: 2
   projectilePrefab: {fileID: 1388671655791291424, guid: 8c044b38d2900a14da825fe6d793f050, type: 3}
+--- !u!114 &4126726610595116350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8602555469995361025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16aa17ccf600caa4bbcf164f0a2851f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPickUpPrefab: {fileID: 1072486868725280543, guid: a6db5fc8dcbb15643a867657336dcf1c, type: 3}
+  healthPickUpPrefab: {fileID: 1094418280079385820, guid: ea7a3aeb302fd48439f9556cacac2960, type: 3}
