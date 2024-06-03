@@ -13,7 +13,6 @@ public class PickUpSpawner : MonoBehaviour
         if (random == 1)
         {
             Instantiate(healthPickUpPrefab, transform.position, Quaternion.identity);
-            Debug.Log("Health");
         }
         Instantiate(coinPickUpPrefab, transform.position, Quaternion.identity);
     }

@@ -8,7 +8,7 @@ public class LevelUpController : Singleton<LevelUpController>
     [Header("Level Up Bar")]
     private float levelUp;
     private float lerpTimer;
-    public float maxLevelUpBar = 15f;
+    public float maxLevelUpBar = 16f;
     public float chipSpeed = 2f;
     public Image frontLevelUpBar;
 
@@ -27,13 +27,11 @@ public class LevelUpController : Singleton<LevelUpController>
         levelUp = Mathf.Clamp(levelUp, 0, maxLevelUpBar);
         UpdateLevelUpUI();
 
-        if (levelUp >= maxLevelUpBar + 1)
+        if (levelUp >= maxLevelUpBar)
         {
             frontLevelUpBar.fillAmount = 0;
-            levelUp = 1;
+            levelUp = 0;
             UpgradePanelController.instance.OpenUpgradePanel();
-
-
         }
 
     }

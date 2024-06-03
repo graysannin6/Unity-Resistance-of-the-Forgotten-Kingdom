@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealthManager : Singleton<PlayerHealthManager>
 {
+    public bool IsDead { get; private set; }
+
     [SerializeField] private int maxHealth = 8;
     [SerializeField] private float knockbackAmount = 10f;
     [SerializeField] private float damageRecoveryTime = 1f;
@@ -22,6 +25,8 @@ public class PlayerHealthManager : Singleton<PlayerHealthManager>
     private KnockBack knockBack;
     private Flash flash;
 
+    readonly int DeathHash = Animator.StringToHash("Death");
+
     protected override void Awake()
     {
         base.Awake();
@@ -31,6 +36,7 @@ public class PlayerHealthManager : Singleton<PlayerHealthManager>
 
     private void Start()
     {
+        IsDead = false;
         currentHealth = maxHealth;
         UpdateHealthUI();
     }
@@ -49,8 +55,6 @@ public class PlayerHealthManager : Singleton<PlayerHealthManager>
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy") && collision.otherCollider is CapsuleCollider2D)
         {
             TakeDamage(1, collision.transform);
-            Debug.Log("Player took damage");
-
         }
     }
 
@@ -72,12 +76,32 @@ public class PlayerHealthManager : Singleton<PlayerHealthManager>
         currentHealth -= damage;
         lerpTimer = 0;
         StartCoroutine(InvincibilityFrames());
+        CheckIfPlayerDeath();
     }
 
     private IEnumerator InvincibilityFrames()
     {
         yield return new WaitForSeconds(damageRecoveryTime);
         canTakeDamage = true;
+    }
+
+    private void CheckIfPlayerDeath()
+    {
+        if (currentHealth <= 0 && !IsDead)
+        {
+            IsDead = true;
+            Destroy(ActiveWeapon.Instance.gameObject);
+            currentHealth = 0;
+            GetComponent<Animator>().SetTrigger(DeathHash);
+            StartCoroutine(DeathLoadSceneRoutine());
+        }
+    }
+
+    private IEnumerator DeathLoadSceneRoutine()
+    {
+        yield return new WaitForSeconds(4f);
+        Destroy(gameObject);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void UpdateHealthUI()

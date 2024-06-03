@@ -12,7 +12,7 @@ public class BaseEnemy : MonoBehaviour
     public float avoidanceRadius = 1.5f;
 
     [SerializeField] protected int maxHealth = 3;
-    protected int currentHealth;
+    protected float currentHealth;
 
     protected Vector3 targetPoint;
     protected SpriteRenderer spriteRenderer;
@@ -113,7 +113,7 @@ public class BaseEnemy : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, avoidanceRadius);
     }
 
-    public virtual void TakeDamage(int damage, Transform damageSource, bool applyKnockback)
+    public virtual void TakeDamage(float damage, Transform damageSource, bool applyKnockback)
     {
         currentHealth -= damage;
         StartCoroutine(flash.FlashWhite());

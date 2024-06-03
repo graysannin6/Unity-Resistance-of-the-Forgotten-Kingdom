@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public Image frontDashBar;
     public Image backDashBar;
 
+
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
     private bool facingLeft = false;
@@ -22,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private GameObject shadow;
     private PlayerInputs playerInputs;
     private float startingMoveSpeed;
+    private float currentMoveSpeed;
     public static PlayerMovement Instance;
     private Collider2D playerCollider;
     private KnockBack knockBack;
@@ -41,8 +43,11 @@ public class PlayerMovement : MonoBehaviour
     {
         playerInputs.GetPlayerControls().Combat.Dash.performed += _ => Dash();
         startingMoveSpeed = moveSpeed;
+        currentMoveSpeed = moveSpeed;
         dashTimer = dashCD;
+        ActiveInventory.Instance.EquipStartingWeapon();
         UpdateDashUI();
+        Debug.Log(currentMoveSpeed);
     }
 
     private void Update()
@@ -56,11 +61,11 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move(Vector2 movementInput)
     {
-        if (knockBack.GettingKnockedBack)
+        if (knockBack.GettingKnockedBack || PlayerHealthManager.Instance.IsDead)
         {
             return;
         }
-        rb.MovePosition(rb.position + movementInput * (moveSpeed * Time.fixedDeltaTime));
+        rb.MovePosition(rb.position + movementInput * (currentMoveSpeed * Time.fixedDeltaTime));
     }
 
     public void AdjustPlayerFacingDirection(Vector2 movementInput)
@@ -82,25 +87,23 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
     private void Dash()
     {
         if (!isDashing && dashTimer >= dashCD)
         {
             isDashing = true;
-            moveSpeed *= dashSpeed;
+            moveSpeed = currentMoveSpeed * dashSpeed;
             trailRenderer.emitting = true;
             playerCollider.enabled = false;
             dashTimer = 0f;
             StartCoroutine(EndDashRoutine());
         }
-
     }
 
     private IEnumerator EndDashRoutine()
     {
         yield return new WaitForSeconds(dashDuration);
-        moveSpeed = startingMoveSpeed;
+        moveSpeed = currentMoveSpeed;
         trailRenderer.emitting = false;
         playerCollider.enabled = true;
         yield return new WaitForSeconds(dashCD - dashDuration);
@@ -112,5 +115,16 @@ public class PlayerMovement : MonoBehaviour
         float fillAmount = Mathf.Clamp01(dashTimer / dashCD);
         frontDashBar.fillAmount = fillAmount;
         backDashBar.fillAmount = fillAmount;
+    }
+
+    public float GetMoveSpeed()
+    {
+        return currentMoveSpeed;
+    }
+
+    public void SetMoveSpeed(float newMoveSpeed)
+    {
+        currentMoveSpeed = newMoveSpeed;
+        //moveSpeed = newMoveSpeed;
     }
 }
