@@ -90,7 +90,7 @@ public class PickUP : MonoBehaviour
         switch (pickUpType)
         {
             case PickUpType.Coin:
-                LevelUpController.Instance.AddExperience(5);
+                LevelUpController.Instance.AddExperience(1);
                 break;
             case PickUpType.Health:
                 PlayerHealthManager.Instance.HealPlayer();

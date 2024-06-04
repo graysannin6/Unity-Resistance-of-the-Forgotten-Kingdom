@@ -43,8 +43,7 @@ public class ObjectPool : MonoBehaviour
     {
         obj.SetActive(false);
 
-        // Reset the enemy's health when returning it to the pool
-        Enemy enemy = obj.GetComponent<Enemy>();
+        BaseEnemy enemy = obj.GetComponent<BaseEnemy>();
         if (enemy != null)
         {
             enemy.ResetHealth();

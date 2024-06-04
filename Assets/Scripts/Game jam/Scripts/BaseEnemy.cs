@@ -115,6 +115,10 @@ public class BaseEnemy : MonoBehaviour
 
     public virtual void TakeDamage(float damage, Transform damageSource, bool applyKnockback)
     {
+        if (isDead)
+        {
+            return;
+        }
         currentHealth -= damage;
         StartCoroutine(flash.FlashWhite());
         if (currentHealth <= 0)

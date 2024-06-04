@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     public bool FacingLeft { get { return facingLeft; } }
-    [SerializeField] private float moveSpeed = 1f;
+    [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float dashSpeed = 4f;
-    [SerializeField] private float dashCD = 0.25f;
+    [SerializeField] private float dashCD = 3f;
     [SerializeField] private float dashDuration = 0.2f;
     [SerializeField] private TrailRenderer trailRenderer;
     public Image frontDashBar;
@@ -23,7 +23,6 @@ public class PlayerMovement : MonoBehaviour
     private GameObject shadow;
     private PlayerInputs playerInputs;
     private float startingMoveSpeed;
-    private float currentMoveSpeed;
     public static PlayerMovement Instance;
     private Collider2D playerCollider;
     private KnockBack knockBack;
@@ -43,11 +42,9 @@ public class PlayerMovement : MonoBehaviour
     {
         playerInputs.GetPlayerControls().Combat.Dash.performed += _ => Dash();
         startingMoveSpeed = moveSpeed;
-        currentMoveSpeed = moveSpeed;
         dashTimer = dashCD;
         ActiveInventory.Instance.EquipStartingWeapon();
         UpdateDashUI();
-        Debug.Log(currentMoveSpeed);
     }
 
     private void Update()
@@ -65,7 +62,10 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
-        rb.MovePosition(rb.position + movementInput * (currentMoveSpeed * Time.fixedDeltaTime));
+
+        rb.MovePosition(rb.position + movementInput * (moveSpeed * Time.fixedDeltaTime));
+        Debug.Log(moveSpeed);
+
     }
 
     public void AdjustPlayerFacingDirection(Vector2 movementInput)
@@ -92,7 +92,8 @@ public class PlayerMovement : MonoBehaviour
         if (!isDashing && dashTimer >= dashCD)
         {
             isDashing = true;
-            moveSpeed = currentMoveSpeed * dashSpeed;
+            startingMoveSpeed = moveSpeed;
+            moveSpeed *= dashSpeed;
             trailRenderer.emitting = true;
             playerCollider.enabled = false;
             dashTimer = 0f;
@@ -103,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator EndDashRoutine()
     {
         yield return new WaitForSeconds(dashDuration);
-        moveSpeed = currentMoveSpeed;
+        moveSpeed = startingMoveSpeed;
         trailRenderer.emitting = false;
         playerCollider.enabled = true;
         yield return new WaitForSeconds(dashCD - dashDuration);
@@ -119,12 +120,11 @@ public class PlayerMovement : MonoBehaviour
 
     public float GetMoveSpeed()
     {
-        return currentMoveSpeed;
+        return moveSpeed;
     }
 
     public void SetMoveSpeed(float newMoveSpeed)
     {
-        currentMoveSpeed = newMoveSpeed;
-        //moveSpeed = newMoveSpeed;
+        moveSpeed = newMoveSpeed;
     }
 }

@@ -10,6 +10,13 @@ public class ShooterEnemy : BaseEnemy
 
     private float lastShotTime;
 
+
+    protected override void Start()
+    {
+        base.Start();
+        lastShotTime = 0;
+    }
+
     protected override void Update()
     {
         if (isDead)
@@ -66,6 +73,12 @@ public class ShooterEnemy : BaseEnemy
 
             lastShotTime = Time.time;
         }
+    }
+
+    public override void ResetHealth()
+    {
+        base.ResetHealth();
+        lastShotTime = 0;
     }
 
 }

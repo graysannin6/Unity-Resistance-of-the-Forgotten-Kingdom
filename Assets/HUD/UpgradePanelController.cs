@@ -30,11 +30,13 @@ public class UpgradePanelController : MonoBehaviour
     public void OpenUpgradePanel()
     {
         Cursor.visible = true;
+        Time.timeScale = 0;
         upgradePanel.SetActive(true);
     }
 
     public void CloseUpgradePanel()
     {
+        Time.timeScale = 1;
         upgradePanel.SetActive(false);
     }
 
@@ -43,10 +45,11 @@ public class UpgradePanelController : MonoBehaviour
         foreach (WeaponInfo weaponInfo in weaponInfos)
         {
             Debug.Log("Before upgrade: " + weaponInfo.weaponDamage);
-            float newDamage = weaponInfo.weaponDamage + (weaponInfo.weaponDamage * 0.1f);
+            float newDamage = weaponInfo.weaponDamage + (weaponInfo.weaponDamage * 0.2f);
             weaponInfo.weaponDamage = newDamage;
             Debug.Log("After upgrade: " + weaponInfo.weaponDamage);
         }
+        ActiveWeapon.Instance?.ApplyUpgrade();
         CloseUpgradePanel();
     }
 
@@ -54,8 +57,9 @@ public class UpgradePanelController : MonoBehaviour
     {
         foreach (WeaponInfo weaponInfo in weaponInfos)
         {
-            weaponInfo.weaponCooldown -= weaponInfo.weaponCooldown * 0.1f;
+            weaponInfo.weaponCooldown -= weaponInfo.weaponCooldown * 0.2f;
         }
+        ActiveWeapon.Instance?.ApplyUpgrade();
         CloseUpgradePanel();
     }
 
@@ -63,6 +67,7 @@ public class UpgradePanelController : MonoBehaviour
     {
         float newSpeed = player.GetMoveSpeed() * 1.1f;
         player.SetMoveSpeed(newSpeed);
+        Debug.Log("New speed: " + player.GetMoveSpeed());
         CloseUpgradePanel();
     }
 }

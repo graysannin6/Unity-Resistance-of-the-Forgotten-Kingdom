@@ -48,16 +48,11 @@ public class ActiveWeapon : Singleton<ActiveWeapon>
         CurrentActiveWeapon = weapon;
         AttackCooldown();
         timeBetweenAttacks = (CurrentActiveWeapon as IWeapon).GetWeaponInfo().weaponCooldown;
-
-        //isAttacking = false;
-        //attackButtonPressed = false;
     }
 
     public void WeaponNull()
     {
         CurrentActiveWeapon = null;
-        //isAttacking = false;
-        //attackButtonPressed = false;
     }
 
     private void AttackCooldown()
@@ -90,6 +85,18 @@ public class ActiveWeapon : Singleton<ActiveWeapon>
         AttackCooldown();
 
         (CurrentActiveWeapon as IWeapon).Attack();
+    }
+
+    public void ApplyUpgrade()
+    {
+        if (CurrentActiveWeapon != null)
+        {
+            var weaponInfo = (CurrentActiveWeapon as IWeapon).GetWeaponInfo();
+            if (weaponInfo != null)
+            {
+                timeBetweenAttacks = weaponInfo.weaponCooldown;
+            }
+        }
     }
 
 }

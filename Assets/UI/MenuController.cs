@@ -7,7 +7,7 @@ using TMPro;
 
 
 public class ButtonBehavior : MonoBehaviour
-{   
+{
     [Header("Volume Setting")]
     [SerializeField] private Slider _volumeSlider = null;
     [SerializeField] private TMP_Text _volumeTextValue = null;
@@ -22,7 +22,6 @@ public class ButtonBehavior : MonoBehaviour
     [SerializeField] private TMP_Dropdown _qualityDropdown;
     [SerializeField] private Toggle _fullScreenToggle;
 
-
     private int _qualityLevel;
     private bool _isFullScreen;
     private float _brightnessLevel;
@@ -36,7 +35,7 @@ public class ButtonBehavior : MonoBehaviour
 
     [Header("New Game Level")]
     public string _newGameLevel;
-    
+
     [Header("Panels")]
     public GameObject _panelStart;
     public GameObject _panelQuit;
@@ -44,7 +43,7 @@ public class ButtonBehavior : MonoBehaviour
     public GameObject _panelAudioSettings;
     public GameObject _panelScreenSettings;
     public GameObject _panelCredits;
-    
+
     // ESSENTIAL FUNCTION FOR LOAD THE GAME AFTER PRESS START
     public void NewGameDialogYes()
     {
@@ -54,62 +53,62 @@ public class ButtonBehavior : MonoBehaviour
     // REFACTORING FUNCTION FOR PANELS
     public void PanelOnStart()
     {
-        _panelStart.SetActive(true);   
+        _panelStart.SetActive(true);
     }
 
     public void PanelOffStart()
     {
-        _panelStart.SetActive(false);   
+        _panelStart.SetActive(false);
     }
 
     public void PanelOnSettings()
     {
-        _panelSettings.SetActive(true);   
+        _panelSettings.SetActive(true);
     }
 
     public void PanelOffSettings()
     {
-        _panelSettings.SetActive(false);   
+        _panelSettings.SetActive(false);
     }
 
     public void PanelOnAudioSettings()
     {
-        _panelAudioSettings.SetActive(true);   
+        _panelAudioSettings.SetActive(true);
     }
 
     public void PanelOffAudioSettings()
     {
-        _panelAudioSettings.SetActive(false);   
+        _panelAudioSettings.SetActive(false);
     }
 
     public void PanelOnScreenSettings()
     {
-        _panelScreenSettings.SetActive(true);   
+        _panelScreenSettings.SetActive(true);
     }
 
     public void PanelOffScreenSettings()
     {
-        _panelScreenSettings.SetActive(false);   
+        _panelScreenSettings.SetActive(false);
     }
 
     public void PanelOnCredits()
     {
-        _panelCredits.SetActive(true);   
+        _panelCredits.SetActive(true);
     }
 
     public void PanelOffCredits()
     {
-        _panelCredits.SetActive(false);   
+        _panelCredits.SetActive(false);
     }
 
     public void PanelOnQuit()
     {
-        _panelQuit.SetActive(true);   
+        _panelQuit.SetActive(true);
     }
 
     public void PanelOffQuit()
     {
-        _panelQuit.SetActive(false);   
+        _panelQuit.SetActive(false);
     }
 
     // ESSENTIAL FONCTION FOR AUDIO CONFIGURATION
@@ -127,14 +126,14 @@ public class ButtonBehavior : MonoBehaviour
 
     public void Reset(string MenuType)
     {
-        if(MenuType == "Audio")
+        if (MenuType == "Audio")
         {
             AudioListener.volume = _defaultVolume;
             _volumeSlider.value = _defaultVolume;
             _volumeTextValue.text = _defaultVolume.ToString("0.0");
         }
 
-        if(MenuType == "Screen")
+        if (MenuType == "Screen")
         {
             _brightnessSlider.value = _defaultBrightness;
             _brightnessTextValue.text = _defaultBrightness.ToString("0.0");
@@ -149,7 +148,6 @@ public class ButtonBehavior : MonoBehaviour
             Screen.SetResolution(currentResolution.width, currentResolution.height, Screen.fullScreen);
             _resolutionDropdown.value = _resolutions.Length;
             GraphicsApply();
-
         }
     }
 
@@ -163,9 +161,9 @@ public class ButtonBehavior : MonoBehaviour
     // SCREEN SETTINGS FUNCTIONS
 
     public void SetBrightness(float brightness)
-    {   
+    {
         _brightnessLevel = brightness;
-        _brightnessTextValue.text = brightness.ToString("0.0");  
+        _brightnessTextValue.text = brightness.ToString("0.0");
     }
 
     public void SetFullScreen(bool isFullScreen)
@@ -174,8 +172,8 @@ public class ButtonBehavior : MonoBehaviour
     }
 
     public void SetQuality(int qualityIndex)
-    {   
-        _qualityLevel = qualityIndex;  
+    {
+        _qualityLevel = qualityIndex;
     }
 
     public void GraphicsApply()
@@ -200,20 +198,29 @@ public class ButtonBehavior : MonoBehaviour
 
         int currentResolutionIndex = 0;
 
-        for(int i = 0; i < _resolutions.Length; i++)
+        for (int i = 0; i < _resolutions.Length; i++)
         {
             string option = _resolutions[i].width + " x " + _resolutions[i].height;
             options.Add(option);
 
-            if(_resolutions[i].width == Screen.width && _resolutions[i].height == Screen.height)
+            if (_resolutions[i].width == 1920 && _resolutions[i].height == 1080)
             {
                 currentResolutionIndex = i;
             }
-        } 
+        }
 
         _resolutionDropdown.AddOptions(options);
         _resolutionDropdown.value = currentResolutionIndex;
-        _resolutionDropdown.RefreshShownValue(); 
+        _resolutionDropdown.RefreshShownValue();
+
+        // Set initial settings
+        _qualityDropdown.value = 2; // Medium quality index, change if your quality settings differ
+        QualitySettings.SetQualityLevel(2);
+
+        _fullScreenToggle.isOn = true;
+        Screen.fullScreen = true;
+
+        Screen.SetResolution(1920, 1080, false);
     }
 
     public void SetResolution(int resolutionIndex)
@@ -222,11 +229,10 @@ public class ButtonBehavior : MonoBehaviour
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
-
     // ESSENTIAL FUNCTION FOR QUIT THE GAME AFTER PRESS QUIT
     public void ExitButton()
     {
         Application.Quit();
     }
-    
+
 }

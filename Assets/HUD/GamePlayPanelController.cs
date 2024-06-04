@@ -8,17 +8,19 @@ public class GamePlayPanelController : MonoBehaviour
     public GameObject _gamePlayPanel;
     void Start()
     {
-        
+        ShowGamePlayPanel();
+        Time.timeScale = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             HideGamePlayPanel();
+            Time.timeScale = 1;
         }
-        
+
     }
 
     public void ShowGamePlayPanel()
