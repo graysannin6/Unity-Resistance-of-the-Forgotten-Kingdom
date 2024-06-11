@@ -17,6 +17,7 @@ public class ActiveInventory : Singleton<ActiveInventory>
     private void Start()
     {
         playerControls.Inventory.MouseRoll.performed += OnMouseRollPerformed;
+        playerControls.Inventory.Keyboard.performed += ctx => OnKeyboardPerformed(ctx);
     }
 
     private void OnEnable()
@@ -29,6 +30,7 @@ public class ActiveInventory : Singleton<ActiveInventory>
         playerControls.Inventory.MouseRoll.performed -= OnMouseRollPerformed;
         playerControls.Disable();
     }
+
 
     public void EquipStartingWeapon()
     {
@@ -46,6 +48,16 @@ public class ActiveInventory : Singleton<ActiveInventory>
         else if (scrollValue < 0)
         {
             ScrollDown();
+        }
+    }
+
+    private void OnKeyboardPerformed(InputAction.CallbackContext context)
+    {
+        int numValue = (int)context.ReadValue<float>();
+
+        if (numValue >= 1 && numValue <= this.transform.childCount)
+        {
+            ToggleActiveSlot(numValue - 1);
         }
     }
 
@@ -71,6 +83,22 @@ public class ActiveInventory : Singleton<ActiveInventory>
         this.transform.GetChild(activeSlotIndexNum).GetChild(0).gameObject.SetActive(true);
 
         ChangeActiveWeapon();
+    }
+
+    private void ToggleActiveSlot(int indexNum)
+    {
+        activeSlotIndexNum = indexNum;
+
+        foreach (Transform inventorySlot in this.transform)
+        {
+            inventorySlot.GetChild(0).gameObject.SetActive(false);
+        }
+
+        this.transform.GetChild(indexNum).GetChild(0).gameObject.SetActive(true);
+
+        ChangeActiveWeapon();
+
+        Debug.Log("Active slot index: " + activeSlotIndexNum);
     }
 
     private void ChangeActiveWeapon()

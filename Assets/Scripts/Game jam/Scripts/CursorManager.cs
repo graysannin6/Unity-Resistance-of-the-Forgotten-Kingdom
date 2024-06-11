@@ -27,7 +27,7 @@ public class CursorManager : MonoBehaviour
         }
         else if (scene.name == "Last Stand")
         {
-            Cursor.SetCursor(gameSceneCursor, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(gameSceneCursor, new Vector2(64, 64), CursorMode.Auto);
         }
     }
 }

@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+
+
     public ObjectPool objectPool;
     public GameObject bossPrefab;
     public Transform[] spawnPoints;
+    public Transform bossSpawnPoint;
+    [SerializeField] private BossNotification bossNotification;
     public int baseEnemiesPerWave = 10;
     public float baseSpawnInterval = 2.0f;
     public float waveInterval = 10.0f;
@@ -16,6 +21,8 @@ public class EnemySpawner : MonoBehaviour
     private float waveTimer;
     private bool bossActive = false;
     private float totalTimeElapsed;
+    [SerializeField] private BossArrowNotification bossArrowNotification;
+
 
     private void Update()
     {
@@ -30,6 +37,11 @@ public class EnemySpawner : MonoBehaviour
                 StartNewWave();
             }
         }
+
+        if (bossActive)
+        {
+            bossArrowNotification.NavigateArrow();
+        }
     }
 
     private void StartNewWave()
@@ -39,7 +51,7 @@ public class EnemySpawner : MonoBehaviour
         currentWave++;
         enemiesSpawned = 0;
 
-        if (currentWave % 5 == 0)
+        if (currentWave % 2 == 0)
         {
             SpawnBoss();
         }
@@ -75,9 +87,9 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnBoss()
     {
-        int spawnIndex = Random.Range(0, spawnPoints.Length);
-        GameObject boss = Instantiate(bossPrefab, spawnPoints[spawnIndex].position, Quaternion.identity);
+        GameObject boss = Instantiate(bossPrefab, bossSpawnPoint.position, Quaternion.identity);
         boss.SetActive(true);
+        bossNotification.ShowBossSpawnMessage();
 
         Boss bossComponent = boss.GetComponent<Boss>();
         if (bossComponent != null)
@@ -86,6 +98,7 @@ public class EnemySpawner : MonoBehaviour
         }
 
         bossActive = true;
+
     }
 
     private void ResumeSpawning()

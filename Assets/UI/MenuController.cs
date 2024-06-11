@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 
 
-public class ButtonBehavior : MonoBehaviour
+public class MenuController : MonoBehaviour
 {
     [Header("Volume Setting")]
     [SerializeField] private Slider _volumeSlider = null;

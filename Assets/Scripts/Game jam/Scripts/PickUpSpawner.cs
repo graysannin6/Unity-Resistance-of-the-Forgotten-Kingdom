@@ -16,4 +16,16 @@ public class PickUpSpawner : MonoBehaviour
         }
         Instantiate(coinPickUpPrefab, transform.position, Quaternion.identity);
     }
+
+    public void DropPickUp(bool isBoss)
+    {
+        if (isBoss)
+        {
+            int randomAmount = Random.Range(5, 10);
+            for (int i = 0; i < randomAmount; i++)
+            {
+                Instantiate(coinPickUpPrefab, transform.position, Quaternion.identity);
+            }
+        }
+    }
 }

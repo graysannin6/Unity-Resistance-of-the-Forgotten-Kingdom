@@ -16,7 +16,7 @@ public class Boss : BaseEnemy
     {
         base.Start();
         shooter = GetComponent<Shooter>();
-        maxHealth = 10;
+        maxHealth = 1;
         currentHealth = maxHealth;
     }
 
@@ -96,6 +96,7 @@ public class Boss : BaseEnemy
     protected override void Die()
     {
         base.Die();
+        GetComponent<PickUpSpawner>().DropPickUp(true);
         OnBossDeath?.Invoke();
     }
 

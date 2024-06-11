@@ -155,6 +155,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Keyboard"",
+                    ""type"": ""Value"",
+                    ""id"": ""a7e67eee-257b-4184-877c-0f9bd2c3ab43"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -166,6 +175,39 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MouseRoll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""43495170-ab61-4d07-8b89-003aa5cf50ea"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale"",
+                    ""groups"": """",
+                    ""action"": ""Keyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a91ba6aa-4bab-4fe1-bce5-11e64cee0bf9"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=2)"",
+                    ""groups"": """",
+                    ""action"": ""Keyboard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""afb1e559-611c-4947-ac93-ac721c3d84e4"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=3)"",
+                    ""groups"": """",
+                    ""action"": ""Keyboard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -184,6 +226,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // Inventory
         m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
         m_Inventory_MouseRoll = m_Inventory.FindAction("MouseRoll", throwIfNotFound: true);
+        m_Inventory_Keyboard = m_Inventory.FindAction("Keyboard", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -346,11 +389,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Inventory;
     private List<IInventoryActions> m_InventoryActionsCallbackInterfaces = new List<IInventoryActions>();
     private readonly InputAction m_Inventory_MouseRoll;
+    private readonly InputAction m_Inventory_Keyboard;
     public struct InventoryActions
     {
         private @PlayerControls m_Wrapper;
         public InventoryActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @MouseRoll => m_Wrapper.m_Inventory_MouseRoll;
+        public InputAction @Keyboard => m_Wrapper.m_Inventory_Keyboard;
         public InputActionMap Get() { return m_Wrapper.m_Inventory; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -363,6 +408,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @MouseRoll.started += instance.OnMouseRoll;
             @MouseRoll.performed += instance.OnMouseRoll;
             @MouseRoll.canceled += instance.OnMouseRoll;
+            @Keyboard.started += instance.OnKeyboard;
+            @Keyboard.performed += instance.OnKeyboard;
+            @Keyboard.canceled += instance.OnKeyboard;
         }
 
         private void UnregisterCallbacks(IInventoryActions instance)
@@ -370,6 +418,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @MouseRoll.started -= instance.OnMouseRoll;
             @MouseRoll.performed -= instance.OnMouseRoll;
             @MouseRoll.canceled -= instance.OnMouseRoll;
+            @Keyboard.started -= instance.OnKeyboard;
+            @Keyboard.performed -= instance.OnKeyboard;
+            @Keyboard.canceled -= instance.OnKeyboard;
         }
 
         public void RemoveCallbacks(IInventoryActions instance)
@@ -399,5 +450,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface IInventoryActions
     {
         void OnMouseRoll(InputAction.CallbackContext context);
+        void OnKeyboard(InputAction.CallbackContext context);
     }
 }
