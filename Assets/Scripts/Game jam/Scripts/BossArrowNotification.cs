@@ -21,7 +21,14 @@ public class BossArrowNotification : MonoBehaviour
         else
         {
             arrowRectTransform.gameObject.SetActive(true);
-            float angle = Mathf.Atan2(toBoss.z, toBoss.x) * Mathf.Rad2Deg;
+
+            // Calculate the direction to the boss in world space
+            Vector3 bossScreenPosition = Camera.main.WorldToScreenPoint(bossTransform.position);
+            Vector3 arrowScreenPosition = Camera.main.WorldToScreenPoint(transform.position);
+            Vector3 direction = bossScreenPosition - arrowScreenPosition;
+
+            // Calculate the angle in 2D space
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             arrowRectTransform.rotation = Quaternion.Euler(0, 0, -angle);
         }
     }

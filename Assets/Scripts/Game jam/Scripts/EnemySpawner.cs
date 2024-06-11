@@ -38,10 +38,6 @@ public class EnemySpawner : MonoBehaviour
             }
         }
 
-        if (bossActive)
-        {
-            bossArrowNotification.NavigateArrow();
-        }
     }
 
     private void StartNewWave()
@@ -51,7 +47,7 @@ public class EnemySpawner : MonoBehaviour
         currentWave++;
         enemiesSpawned = 0;
 
-        if (currentWave % 2 == 0)
+        if (currentWave % 5 == 0)
         {
             SpawnBoss();
         }
