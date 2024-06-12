@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-
 public class MenuController : MonoBehaviour
 {
     [Header("Volume Setting")]
@@ -14,17 +13,14 @@ public class MenuController : MonoBehaviour
     [SerializeField] private float _defaultVolume = 0.5f;
 
     [Header("Screen Settings")]
-    [SerializeField] private Slider _brightnessSlider = null;
-    [SerializeField] private TMP_Text _brightnessTextValue = null;
-    [SerializeField] private float _defaultBrightness = 0.5f;
 
     [Space(10)]
     [SerializeField] private TMP_Dropdown _qualityDropdown;
     [SerializeField] private Toggle _fullScreenToggle;
+    
 
     private int _qualityLevel;
     private bool _isFullScreen;
-    private float _brightnessLevel;
 
     [Header("Resolution Dropdown")]
     public TMP_Dropdown _resolutionDropdown;
@@ -111,7 +107,7 @@ public class MenuController : MonoBehaviour
         _panelQuit.SetActive(false);
     }
 
-    // ESSENTIAL FONCTION FOR AUDIO CONFIGURATION
+    // ESSENTIAL FUNCTION FOR AUDIO CONFIGURATION
     public void SetVolume(float volume)
     {
         AudioListener.volume = volume;
@@ -135,9 +131,6 @@ public class MenuController : MonoBehaviour
 
         if (MenuType == "Screen")
         {
-            _brightnessSlider.value = _defaultBrightness;
-            _brightnessTextValue.text = _defaultBrightness.ToString("0.0");
-
             _qualityDropdown.value = 1;
             QualitySettings.SetQualityLevel(1);
 
@@ -160,12 +153,6 @@ public class MenuController : MonoBehaviour
 
     // SCREEN SETTINGS FUNCTIONS
 
-    public void SetBrightness(float brightness)
-    {
-        _brightnessLevel = brightness;
-        _brightnessTextValue.text = brightness.ToString("0.0");
-    }
-
     public void SetFullScreen(bool isFullScreen)
     {
         _isFullScreen = isFullScreen;
@@ -178,7 +165,6 @@ public class MenuController : MonoBehaviour
 
     public void GraphicsApply()
     {
-        PlayerPrefs.SetFloat("masterBrightness", _brightnessLevel);
 
         PlayerPrefs.SetInt("masterQuality", _qualityLevel);
         QualitySettings.SetQualityLevel(_qualityLevel);
@@ -187,6 +173,7 @@ public class MenuController : MonoBehaviour
         Screen.fullScreen = _isFullScreen;
         StartCoroutine(ConfirmationBox());
     }
+
 
     // RESOLUTION SETTINGS FUNCTIONS
     private void Start()
@@ -234,5 +221,4 @@ public class MenuController : MonoBehaviour
     {
         Application.Quit();
     }
-
 }
