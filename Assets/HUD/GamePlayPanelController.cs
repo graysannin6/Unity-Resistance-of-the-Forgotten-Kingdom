@@ -7,36 +7,41 @@ public class GamePlayPanelController : MonoBehaviour
 {
     public GameObject _gamePlayPanel;
     public GameObject _gamePlayUpgradePanel;
-    public bool isShowing = true;
+    private enum PanelState { GamePlay, Upgrade, None }
+    private PanelState currentState;
+
     void Start()
     {
         ShowGamePlayPanel();
-        Time.timeScale = 0;
     }
 
-    // Update is called once per frame
     void Update()
-{
-    if (Input.GetKeyDown(KeyCode.F))
-    {   
-        if (isShowing)
+    {
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            HideGamePlayUpgradePanel();
-            isShowing = false;
-        }
-        else
-        {
-            HideGamePlayPanel();
-            Time.timeScale = 1;
-            ShowGamePlayUpgradePanel();
-            isShowing = true;
+            switch (currentState)
+            {
+                case PanelState.GamePlay:
+                    HideGamePlayPanel();
+                    ShowGamePlayUpgradePanel();
+                    break;
+                case PanelState.Upgrade:
+                    HideGamePlayUpgradePanel();
+                    UnpauseGame();
+                    break;
+                case PanelState.None:
+                    ShowGamePlayPanel();
+                    break;
+            }
         }
     }
-}
 
     public void ShowGamePlayPanel()
     {
         _gamePlayPanel.SetActive(true);
+        _gamePlayUpgradePanel.SetActive(false);
+        Time.timeScale = 0;
+        currentState = PanelState.GamePlay;
     }
 
     public void HideGamePlayPanel()
@@ -47,10 +52,17 @@ public class GamePlayPanelController : MonoBehaviour
     public void ShowGamePlayUpgradePanel()
     {
         _gamePlayUpgradePanel.SetActive(true);
+        currentState = PanelState.Upgrade;
     }
 
     public void HideGamePlayUpgradePanel()
     {
         _gamePlayUpgradePanel.SetActive(false);
+    }
+
+    public void UnpauseGame()
+    {
+        Time.timeScale = 1;
+        currentState = PanelState.None;
     }
 }

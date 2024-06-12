@@ -4,16 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class PauseManager : MonoBehaviour
+public class PauseManager : Singleton<PauseManager>
 {
     public GameObject pauseMenuUI;
 
     private bool isPaused = false;
 
-    void Start()
+    protected override void Awake()
     {
-        // Make sure the game starts in the unpaused state
-        ResumeGame();
+        base.Awake();
     }
 
     void Update()
