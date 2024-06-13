@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 
 public class UpgradePanelController : MonoBehaviour
@@ -9,6 +10,14 @@ public class UpgradePanelController : MonoBehaviour
     public static UpgradePanelController instance;
     public GameObject upgradePanel;
     private PlayerMovement player;
+
+    public TMP_Text counterDamageLevelText;
+    public TMP_Text counterAbilityHasteLevelText;
+    public TMP_Text counterMoveSpeedLevelText;
+
+    private int counterDamageLevel =0;
+    private int counterAbilityHasteLevel =0;
+    private int counterMoveSpeedLevel =0;
 
     [SerializeField] private List<WeaponInfo> weaponInfos;
 
@@ -48,9 +57,12 @@ public class UpgradePanelController : MonoBehaviour
             float newDamage = weaponInfo.weaponDamage + (weaponInfo.weaponDamage * 0.2f);
             weaponInfo.weaponDamage = newDamage;
             Debug.Log("After upgrade: " + weaponInfo.weaponDamage);
+            
         }
         ActiveWeapon.Instance?.ApplyUpgrade();
         CloseUpgradePanel();
+        counterDamageLevel++;
+        counterDamageLevelText.text = counterDamageLevel.ToString();
     }
 
     public void UpgradeAbilityHaste()
@@ -61,6 +73,9 @@ public class UpgradePanelController : MonoBehaviour
         }
         ActiveWeapon.Instance?.ApplyUpgrade();
         CloseUpgradePanel();
+        counterAbilityHasteLevel++;
+        counterAbilityHasteLevelText.text = counterAbilityHasteLevel.ToString();
+
     }
 
     public void UpgradeMoveSpeed()
@@ -69,6 +84,9 @@ public class UpgradePanelController : MonoBehaviour
         player.SetMoveSpeed(newSpeed);
         Debug.Log("New speed: " + player.GetMoveSpeed());
         CloseUpgradePanel();
+        counterMoveSpeedLevel++;
+        counterMoveSpeedLevelText.text = counterMoveSpeedLevel.ToString();
+        
     }
 }
 
