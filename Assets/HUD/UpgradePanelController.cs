@@ -15,9 +15,9 @@ public class UpgradePanelController : MonoBehaviour
     public TMP_Text counterAbilityHasteLevelText;
     public TMP_Text counterMoveSpeedLevelText;
 
-    private int counterDamageLevel =0;
-    private int counterAbilityHasteLevel =0;
-    private int counterMoveSpeedLevel =0;
+    private int counterDamageLevel = 0;
+    private int counterAbilityHasteLevel = 0;
+    private int counterMoveSpeedLevel = 0;
 
     [SerializeField] private List<WeaponInfo> weaponInfos;
 
@@ -26,14 +26,36 @@ public class UpgradePanelController : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            //DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject);
+
+            player = FindObjectOfType<PlayerMovement>();
+
+            LoadCounterValues();
         }
         else
         {
             Destroy(gameObject);
         }
+    }
 
-        player = FindObjectOfType<PlayerMovement>();
+    private void LoadCounterValues()
+    {
+        counterDamageLevel = PlayerPrefs.GetInt("CounterDamageLevel", 0);
+        counterAbilityHasteLevel = PlayerPrefs.GetInt("CounterAbilityHasteLevel", 0);
+        counterMoveSpeedLevel = PlayerPrefs.GetInt("CounterMoveSpeedLevel", 0);
+
+        counterDamageLevelText.text = counterDamageLevel.ToString();
+        counterAbilityHasteLevelText.text = counterAbilityHasteLevel.ToString();
+        counterMoveSpeedLevelText.text = counterMoveSpeedLevel.ToString();
+    }
+
+    private void SaveCounterValues()
+    {
+        PlayerPrefs.SetInt("CounterDamageLevel", counterDamageLevel);
+        PlayerPrefs.SetInt("CounterAbilityHasteLevel", counterAbilityHasteLevel);
+        PlayerPrefs.SetInt("CounterMoveSpeedLevel", counterMoveSpeedLevel);
+
+        PlayerPrefs.Save();
     }
 
     public void OpenUpgradePanel()
@@ -57,12 +79,12 @@ public class UpgradePanelController : MonoBehaviour
             float newDamage = weaponInfo.weaponDamage + (weaponInfo.weaponDamage * 0.2f);
             weaponInfo.weaponDamage = newDamage;
             Debug.Log("After upgrade: " + weaponInfo.weaponDamage);
-            
         }
         ActiveWeapon.Instance?.ApplyUpgrade();
         CloseUpgradePanel();
         counterDamageLevel++;
         counterDamageLevelText.text = counterDamageLevel.ToString();
+        SaveCounterValues();
     }
 
     public void UpgradeAbilityHaste()
@@ -75,7 +97,7 @@ public class UpgradePanelController : MonoBehaviour
         CloseUpgradePanel();
         counterAbilityHasteLevel++;
         counterAbilityHasteLevelText.text = counterAbilityHasteLevel.ToString();
-
+        SaveCounterValues();
     }
 
     public void UpgradeMoveSpeed()
@@ -86,7 +108,7 @@ public class UpgradePanelController : MonoBehaviour
         CloseUpgradePanel();
         counterMoveSpeedLevel++;
         counterMoveSpeedLevelText.text = counterMoveSpeedLevel.ToString();
-        
+        SaveCounterValues();
     }
 }
 

@@ -8,14 +8,23 @@ public class Staff : MonoBehaviour, IWeapon
     [SerializeField] private WeaponInfo weaponInfo;
     [SerializeField] private GameObject fireBall;
     [SerializeField] private Transform firePoint;
+    [SerializeField] private AudioClip audioClip;
 
     private Animator animator;
+    private AudioSource audioSource;
 
     readonly int fireHash = Animator.StringToHash("Fire");
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+
+        // If the AudioSource component is not attached, add it
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     private void Update()
@@ -32,6 +41,16 @@ public class Staff : MonoBehaviour, IWeapon
     {
         GameObject newFireBall = Instantiate(fireBall, firePoint.position, Quaternion.identity);
         newFireBall.GetComponent<FireBall>().UpdateWeaponInfo(weaponInfo);
+        PlayAudioClip();
+    }
+
+    private void PlayAudioClip()
+    {
+        if (audioClip != null && audioSource != null)
+        {
+            audioSource.clip = audioClip;
+            audioSource.Play();
+        }
     }
 
     public WeaponInfo GetWeaponInfo()
