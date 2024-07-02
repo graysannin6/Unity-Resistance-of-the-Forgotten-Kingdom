@@ -44,6 +44,9 @@ public class MenuController : MonoBehaviour
     public void NewGameDialogYes()
     {
         SceneManager.LoadScene(_newGameLevel);
+        UpgradePanelController.instance.SetCounterAbilityHasteLevel(0);
+        UpgradePanelController.instance.SetCounterDamageLevel(0);
+        UpgradePanelController.instance.SetCounterMoveSpeedLevel(0);
     }
 
     // REFACTORING FUNCTION FOR PANELS
