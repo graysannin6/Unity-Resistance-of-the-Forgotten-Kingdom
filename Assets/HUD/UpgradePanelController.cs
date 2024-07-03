@@ -15,9 +15,9 @@ public class UpgradePanelController : MonoBehaviour
     public TMP_Text counterAbilityHasteLevelText;
     public TMP_Text counterMoveSpeedLevelText;
 
-    private int counterDamageLevel = 0;
-    private int counterAbilityHasteLevel = 0;
-    private int counterMoveSpeedLevel = 0;
+    public  int counterDamageLevel = 0;
+    public  int counterAbilityHasteLevel = 0;
+    public  int counterMoveSpeedLevel = 0;
 
     [SerializeField] private List<WeaponInfo> weaponInfos;
 
@@ -107,6 +107,27 @@ public class UpgradePanelController : MonoBehaviour
         Debug.Log("New speed: " + player.GetMoveSpeed());
         CloseUpgradePanel();
         counterMoveSpeedLevel++;
+        counterMoveSpeedLevelText.text = counterMoveSpeedLevel.ToString();
+        SaveCounterValues();
+    }
+
+    public void SetCounterDamageLevel(int value)
+    {
+        counterDamageLevel = value;
+        counterDamageLevelText.text = counterDamageLevel.ToString();
+        SaveCounterValues();
+    }
+
+    public void SetCounterAbilityHasteLevel(int value)
+    {
+        counterAbilityHasteLevel = value;
+        counterAbilityHasteLevelText.text = counterAbilityHasteLevel.ToString();
+        SaveCounterValues();
+    }
+
+    public void SetCounterMoveSpeedLevel(int value)
+    {
+        counterMoveSpeedLevel = value;
         counterMoveSpeedLevelText.text = counterMoveSpeedLevel.ToString();
         SaveCounterValues();
     }
