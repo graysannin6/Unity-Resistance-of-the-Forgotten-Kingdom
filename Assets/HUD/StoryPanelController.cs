@@ -18,6 +18,7 @@ public class StoryPanelController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             SceneManager.LoadScene(_nextScene);
+            //AudioManager.instance.PlayMainMusic();
         }
 
     }

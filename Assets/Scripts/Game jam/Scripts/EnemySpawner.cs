@@ -86,6 +86,8 @@ public class EnemySpawner : MonoBehaviour
         GameObject boss = Instantiate(bossPrefab, bossSpawnPoint.position, Quaternion.identity);
         boss.SetActive(true);
         bossNotification.ShowBossSpawnMessage();
+        AudioManager.instance.StopMainMusic();
+        AudioManager.instance.PlayBossOneMusic();
 
         Boss bossComponent = boss.GetComponent<Boss>();
         if (bossComponent != null)

@@ -98,6 +98,8 @@ public class Boss : BaseEnemy
         base.Die();
         GetComponent<PickUpSpawner>().DropPickUp(true);
         OnBossDeath?.Invoke();
+        AudioManager.instance.StopBossOneMusic();
+        AudioManager.instance.PlayMainMusic();
     }
 
     protected override IEnumerator ReturnToPoolAfterDeath()
