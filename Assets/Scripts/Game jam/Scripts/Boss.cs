@@ -100,6 +100,7 @@ public class Boss : BaseEnemy
         OnBossDeath?.Invoke();
         AudioManager.instance.StopBossOneMusic();
         AudioManager.instance.PlayMainMusic();
+        UpgradePanelController.instance.AddEnemiesKilled(1);
     }
 
     protected override IEnumerator ReturnToPoolAfterDeath()

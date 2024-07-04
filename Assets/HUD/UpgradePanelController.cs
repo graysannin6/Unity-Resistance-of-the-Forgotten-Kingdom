@@ -14,10 +14,12 @@ public class UpgradePanelController : MonoBehaviour
     public TMP_Text counterDamageLevelText;
     public TMP_Text counterAbilityHasteLevelText;
     public TMP_Text counterMoveSpeedLevelText;
+    public TMP_Text counterEnemiesKilledText;
 
     public  int counterDamageLevel = 0;
     public  int counterAbilityHasteLevel = 0;
     public  int counterMoveSpeedLevel = 0;
+    public int counterEnemiesKilled = 0;
 
     [SerializeField] private List<WeaponInfo> weaponInfos;
 
@@ -43,10 +45,12 @@ public class UpgradePanelController : MonoBehaviour
         counterDamageLevel = PlayerPrefs.GetInt("CounterDamageLevel", 0);
         counterAbilityHasteLevel = PlayerPrefs.GetInt("CounterAbilityHasteLevel", 0);
         counterMoveSpeedLevel = PlayerPrefs.GetInt("CounterMoveSpeedLevel", 0);
+        counterEnemiesKilled = PlayerPrefs.GetInt("CounterEnemiesKilled", 0);
 
         counterDamageLevelText.text = counterDamageLevel.ToString();
         counterAbilityHasteLevelText.text = counterAbilityHasteLevel.ToString();
         counterMoveSpeedLevelText.text = counterMoveSpeedLevel.ToString();
+        counterEnemiesKilledText.text = counterEnemiesKilled.ToString();
     }
 
     private void SaveCounterValues()
@@ -129,6 +133,20 @@ public class UpgradePanelController : MonoBehaviour
     {
         counterMoveSpeedLevel = value;
         counterMoveSpeedLevelText.text = counterMoveSpeedLevel.ToString();
+        SaveCounterValues();
+    }
+
+    public void SetCounterEnemiesKilled(int value)
+    {
+        counterEnemiesKilled = value;
+        counterEnemiesKilledText.text = counterEnemiesKilled.ToString();
+        SaveCounterValues();
+    }
+
+    public void AddEnemiesKilled(int value)
+    {
+        counterEnemiesKilled += value;
+        counterEnemiesKilledText.text = counterEnemiesKilled.ToString();
         SaveCounterValues();
     }
 }

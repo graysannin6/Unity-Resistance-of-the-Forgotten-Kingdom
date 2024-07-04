@@ -147,6 +147,7 @@ public class BaseEnemy : MonoBehaviour
         GetComponent<PickUpSpawner>().DropPickUp();
         animator.SetTrigger("Die");
         StartCoroutine(ReturnToPoolAfterDeath());
+        UpgradePanelController.instance.AddEnemiesKilled(1);
     }
 
     protected virtual IEnumerator ReturnToPoolAfterDeath()

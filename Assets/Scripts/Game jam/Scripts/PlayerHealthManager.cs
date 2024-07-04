@@ -94,6 +94,7 @@ public class PlayerHealthManager : Singleton<PlayerHealthManager>
             currentHealth = 0;
             GetComponent<Animator>().SetTrigger(DeathHash);
             StartCoroutine(DeathLoadSceneRoutine());
+            UpgradePanelController.instance.SetCounterEnemiesKilled(0);
         }
     }
 
