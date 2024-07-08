@@ -2730,7 +2730,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7283965295170049108, guid: ce624951471c9c9418e4621ebb6f3247, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -61771,7 +61771,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &895923555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68624,7 +68624,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 62197484}
-  elapsedTime: 0
 --- !u!114 &1845040574
 MonoBehaviour:
   m_ObjectHideFlags: 0
