@@ -23,7 +23,7 @@ public class StoryTaller : MonoBehaviour
                             "but for the very soul of a world teetering on the brink of annihilation. Stand with him, witness his valor, "+ 
                             "and wonder—can he hold back the night, or will the shadows finally prevail?"+ "\n" +
                             "Press F to continue ...";
-            textWriter.AddWriter(messageText, longText, 0.07f);
+            textWriter.AddWriter(messageText, longText, 0.7f);
         }
         else
         {
