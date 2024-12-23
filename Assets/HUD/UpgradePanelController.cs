@@ -30,14 +30,23 @@ public class UpgradePanelController : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
 
-            player = FindObjectOfType<PlayerMovement>();
+            
 
             LoadCounterValues();
         }
         else
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
+        player = FindObjectOfType<PlayerMovement>();
+    }
+
+    private void ResetStats()
+    {
+        SetCounterAbilityHasteLevel(0);
+        SetCounterDamageLevel(0);
+        SetCounterMoveSpeedLevel(0);
+        SetCounterEnemiesKilled(0);
     }
 
 
@@ -85,7 +94,9 @@ public class UpgradePanelController : MonoBehaviour
             weaponInfo.weaponDamage = newDamage;
             Debug.Log("After upgrade: " + weaponInfo.weaponDamage);
         }
+        
         ActiveWeapon.Instance?.ApplyUpgrade();
+        
         CloseUpgradePanel();
         counterDamageLevel++;
         counterDamageLevelText.text = counterDamageLevel.ToString();
@@ -95,8 +106,10 @@ public class UpgradePanelController : MonoBehaviour
     public void UpgradeAbilityHaste()
     {
         foreach (WeaponInfo weaponInfo in weaponInfos)
-        {
+        {   
+            Debug.Log("Before upgrade: " + weaponInfo.weaponCooldown);
             weaponInfo.weaponCooldown -= weaponInfo.weaponCooldown * 0.2f;
+            Debug.Log("After upgrade: " + weaponInfo.weaponCooldown);
         }
         ActiveWeapon.Instance?.ApplyUpgrade();
         CloseUpgradePanel();
@@ -149,6 +162,7 @@ public class UpgradePanelController : MonoBehaviour
         counterEnemiesKilled += value;
         counterEnemiesKilledText.text = counterEnemiesKilled.ToString();
         SaveCounterValues();
+        
     }
 }
 

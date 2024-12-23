@@ -159173,33 +159173,148 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4087208833606120664, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087208833606120664, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087208833606120664, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087208833606120664, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 995848283}
+    - target: {fileID: 4087208833606120664, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 995848283}
+    - target: {fileID: 4087208833606120664, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4087208833606120664, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: UpgradeAbilityHaste
       objectReference: {fileID: 0}
+    - target: {fileID: 4087208833606120664, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: CloseUpgradePanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087208833606120664, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UpgradePanelController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087208833606120664, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4087208833606120664, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4178143322343986046, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4178143322343986046, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4178143322343986046, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4178143322343986046, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 995848283}
+    - target: {fileID: 4178143322343986046, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 995848283}
+    - target: {fileID: 4178143322343986046, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4178143322343986046, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: UpgradeMoveSpeed
       objectReference: {fileID: 0}
+    - target: {fileID: 4178143322343986046, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: CloseUpgradePanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 4178143322343986046, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UpgradePanelController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4178143322343986046, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4178143322343986046, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993382574725278215, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993382574725278215, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993382574725278215, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7993382574725278215, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 995848283}
+    - target: {fileID: 7993382574725278215, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 995848283}
+    - target: {fileID: 7993382574725278215, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993382574725278215, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7993382574725278215, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: UpgradeDamage
       objectReference: {fileID: 0}
+    - target: {fileID: 7993382574725278215, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: CloseUpgradePanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993382574725278215, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UpgradePanelController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993382574725278215, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993382574725278215, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2687331920022810459, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 995848283}
   m_SourcePrefab: {fileID: 100100000, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
 --- !u!224 &739715382 stripped
 RectTransform:
@@ -170634,10 +170749,10 @@ MonoBehaviour:
   counterAbilityHasteLevelText: {fileID: 753240568}
   counterMoveSpeedLevelText: {fileID: 792839816}
   counterEnemiesKilledText: {fileID: 492552349}
-  counterDamageLevel: 0
-  counterAbilityHasteLevel: 0
-  counterMoveSpeedLevel: 0
-  counterEnemiesKilled: 0
+  counterDamageLevel: 5
+  counterAbilityHasteLevel: 5
+  counterMoveSpeedLevel: 5
+  counterEnemiesKilled: 5
   weaponInfos:
   - {fileID: 11400000, guid: 5c9346375df5b694b88d4941ed8fa51c, type: 2}
   - {fileID: 11400000, guid: 9a9771d395f906b42902fa1524465ae6, type: 2}
@@ -205136,6 +205251,28 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2687331920022810459, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
   m_PrefabInstance: {fileID: 739715381}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &995848283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995848280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e3bbbc55b71f0743b31980ecac5d47a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradePanel: {fileID: 995848280}
+  counterDamageLevelText: {fileID: 1799986640}
+  counterAbilityHasteLevelText: {fileID: 753240568}
+  counterMoveSpeedLevelText: {fileID: 792839816}
+  counterEnemiesKilledText: {fileID: 492552349}
+  counterDamageLevel: 0
+  counterAbilityHasteLevel: 0
+  counterMoveSpeedLevel: 0
+  counterEnemiesKilled: 0
+  weaponInfos: []
 --- !u!1 &1033701857
 GameObject:
   m_ObjectHideFlags: 0
@@ -207299,7 +207436,6 @@ GameObject:
   - component: {fileID: 1529595289}
   - component: {fileID: 1529595291}
   - component: {fileID: 1529595290}
-  - component: {fileID: 1529595292}
   m_Layer: 5
   m_Name: CounterPanel
   m_TagString: Untagged
@@ -207368,28 +207504,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1529595288}
   m_CullTransparentMesh: 1
---- !u!114 &1529595292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1529595288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e3bbbc55b71f0743b31980ecac5d47a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  upgradePanel: {fileID: 0}
-  counterDamageLevelText: {fileID: 0}
-  counterAbilityHasteLevelText: {fileID: 0}
-  counterMoveSpeedLevelText: {fileID: 0}
-  counterEnemiesKilledText: {fileID: 0}
-  counterDamageLevel: 0
-  counterAbilityHasteLevel: 0
-  counterMoveSpeedLevel: 0
-  counterEnemiesKilled: 0
-  weaponInfos: []
 --- !u!1 &1549431331
 GameObject:
   m_ObjectHideFlags: 0

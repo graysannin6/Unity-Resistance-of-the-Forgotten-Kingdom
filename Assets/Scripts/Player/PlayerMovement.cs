@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         rb.MovePosition(rb.position + movementInput * (moveSpeed * Time.fixedDeltaTime));
-        Debug.Log(moveSpeed);
+        //Debug.Log(moveSpeed);
 
     }
 
