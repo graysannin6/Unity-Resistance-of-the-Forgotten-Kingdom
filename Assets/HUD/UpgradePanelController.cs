@@ -40,6 +40,7 @@ public class UpgradePanelController : MonoBehaviour
         }
     }
 
+
     private void LoadCounterValues()
     {
         counterDamageLevel = PlayerPrefs.GetInt("CounterDamageLevel", 0);

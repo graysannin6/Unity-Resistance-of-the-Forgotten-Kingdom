@@ -159175,7 +159175,7 @@ PrefabInstance:
     - target: {fileID: 4087208833606120664, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 913884805}
+      objectReference: {fileID: 0}
     - target: {fileID: 4087208833606120664, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: UpgradeAbilityHaste
@@ -159183,7 +159183,7 @@ PrefabInstance:
     - target: {fileID: 4178143322343986046, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 913884805}
+      objectReference: {fileID: 0}
     - target: {fileID: 4178143322343986046, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: UpgradeMoveSpeed
@@ -159191,7 +159191,7 @@ PrefabInstance:
     - target: {fileID: 7993382574725278215, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 913884805}
+      objectReference: {fileID: 0}
     - target: {fileID: 7993382574725278215, guid: 531f46529bed61c4da29a84ff7edebe3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: UpgradeDamage
@@ -207299,6 +207299,7 @@ GameObject:
   - component: {fileID: 1529595289}
   - component: {fileID: 1529595291}
   - component: {fileID: 1529595290}
+  - component: {fileID: 1529595292}
   m_Layer: 5
   m_Name: CounterPanel
   m_TagString: Untagged
@@ -207367,6 +207368,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1529595288}
   m_CullTransparentMesh: 1
+--- !u!114 &1529595292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529595288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e3bbbc55b71f0743b31980ecac5d47a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradePanel: {fileID: 0}
+  counterDamageLevelText: {fileID: 0}
+  counterAbilityHasteLevelText: {fileID: 0}
+  counterMoveSpeedLevelText: {fileID: 0}
+  counterEnemiesKilledText: {fileID: 0}
+  counterDamageLevel: 0
+  counterAbilityHasteLevel: 0
+  counterMoveSpeedLevel: 0
+  counterEnemiesKilled: 0
+  weaponInfos: []
 --- !u!1 &1549431331
 GameObject:
   m_ObjectHideFlags: 0
@@ -209461,7 +209484,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 62197484}
-  elapsedTime: 0
 --- !u!114 &1845040574
 MonoBehaviour:
   m_ObjectHideFlags: 0
